@@ -1,0 +1,105 @@
+.cFZvyK {
+  width: calc(100% - 220px);
+  transition: all 0.3s ease 0s;
+  margin-left: 220px;
+  padding: 20px 40px;
+  z-index: 3;
+  position: relative;
+
+  h2 {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+.iDDieF {
+  width: calc(100% - 220px);
+  transition: all 0.3s ease 0s;
+  margin-left: 220px;
+
+  > button {
+    padding-left: 40px;
+    margin-bottom: 10px;
+  }
+}
+
+.iBeWfn {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding: 0px 40px 10px;
+  position: relative;
+  margin-bottom: 10px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 3px 3px 0px;
+
+  img {
+    width: 70px;
+    height: 70px;
+    margin-right: 25px;
+    object-fit: contain;
+    transition: all 0.3s ease 0s;
+  }
+
+  h6 {
+    font-size: 15px;
+    font-family: "Inter Bold", sans-serif;
+    margin-bottom: 0px;
+    white-space: normal;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  > div:last-child {
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  > div:last-child > span {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  > div > button {
+    margin: 0px 10px 0px 0px;
+  }
+}
+
+.jLbNeS {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+
+  p:not(:last-child) {
+    margin-right: 30px;
+    position: relative;
+  }
+  
+  p {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 11px;
+    color: rgb(90, 88, 89);
+    margin-bottom: 0px;
+  }
+
+  p:not(:last-child)::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 10px;
+    background: rgb(114, 114, 114);
+    top: 50%;
+    right: -15px;
+    transform: translateY(-50%);
+  }
+}

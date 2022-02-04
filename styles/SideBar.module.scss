@@ -1,0 +1,85 @@
+.container {
+  transition: all 0.3s ease 0s;
+  width: 220px;
+  background: rgb(9, 14, 53);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  z-index: 10;
+  // overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    height: 66px;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(34, 63, 97);
+
+    span{
+      color: white;
+    }  
+  }
+  
+  .buttons{
+    padding: 17px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-flex: 1;
+    // flex-grow: 1;
+    border-bottom: 1px solid rgb(34, 63, 97);
+    
+    .add_products {
+      padding: 0px 20px;
+      margin-bottom: 10px;
+    
+      .btn {
+        width: 100%;
+        height: 38px;
+        background: rgb(202, 223, 248);
+        position: relative;
+        border-radius: 30px;
+        color: rgb(9, 14, 53);
+        margin: 0px auto;
+        -webkit-box-pack: start;
+        // justify-content: flex-start;
+        border: none;
+        cursor: pointer;
+      
+        .icon {
+          margin: 0px 5px 0px 0px;
+          width: 24px;
+          height: 24px;
+        }
+      }
+      
+      .btn:hover{
+        background: rgb(227, 157, 71);
+      }  
+    }
+    
+    .container > div > a.active svg [class*="-icon"] {
+      fill: rgb(228, 158, 76);
+    }
+
+    .container > div > a:hover svg [class*="-icon"] {
+      fill: rgb(228, 158, 76);
+    }
+  } 
+}
+
+
+.btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* font-size: var(--fz-13); */
+}
