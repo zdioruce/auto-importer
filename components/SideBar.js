@@ -1,7 +1,7 @@
-import styles from '../styles/SideBar.module.scss'
+import styles from './SideBar.module.scss'
 import SideBarMenuItem from './SideBarMenuItem'
 import { useState, useCallback } from 'react';
-import Image from 'next/image';
+import PlusIcon from '../public/plus.svg'
 
 export default function SideBar({handleAddProducts}) {
 
@@ -18,15 +18,17 @@ export default function SideBar({handleAddProducts}) {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.title}>
-        <span>Auto Importer</span>
+    <div className={styles.kyBGgY}>
+      <div className={styles.fhoual}>
+        <div className={styles['ant-dropdown-trigger'] + ' flex jc-c ai-c'}>
+          <span>Auto Importer</span>
+        </div>
       </div>
-      <div className={styles.buttons}>
+      <div className={styles.ggSlQC}>
         <div>
-          <div className={styles.add_products}>    
-            <button className={styles.btn} onClick={handleAddProducts}>
-              <Image src={"/plus.svg"} width={24} height={24}/>
+          <div className={styles.hmjpfq}>    
+            <button className={styles['btn1'] + ' ' + styles['ant-dropdown-trigger'] + ' btn'} onClick={handleAddProducts}>
+              <PlusIcon/>
               <span>Add Products</span>
             </button>
           </div>

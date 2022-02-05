@@ -1,0 +1,115 @@
+.cFZvyK {
+  width: calc(100% - 220px);
+  transition: all 0.3s ease 0s;
+  margin-left: 220px;
+  padding: 20px 40px;
+  z-index: 3;
+  position: relative;
+
+  h2 {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+.zrVas {
+  padding: 0px 40px 20px;
+  width: calc(100% - 220px);
+  transition: all 0.3s ease 0s;
+  margin-left: 220px;
+  position: relative;
+}
+
+.iPOzKR {
+  min-width: min-content;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  z-index: 2;
+
+  .save, .import {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 36px;
+    margin-left: 10px;
+    min-width: 115px;
+    padding: 0px 20px;
+    z-index: 2;
+    font-family: "Inter Regular", sans-serif;
+    border-color: rgb(90, 88, 89);
+    background: transparent;
+
+    :hover {
+      background: rgb(228, 158, 76);
+      border-color: rgb(228, 158, 76);
+    }
+  }
+}
+
+
+.iEWzQZ {
+  height: calc(100vh - 420px);
+  width: 100%;
+
+  .gwIBEu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    background: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 4px;
+
+    .hpZlJk {
+      display: flex;
+      flex-direction: column;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+
+      .bMbqPw {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        width: 82px;
+        height: 82px;
+        border-radius: 50%;
+        background: rgb(242, 242, 242);
+      }
+
+      h3 {
+        font-family: "ProximaNova SemiBold", sans-serif;
+        color: rgb(90, 88, 89);
+        margin: 15px 0px 5px;
+        text-align: center;
+      }
+
+      p {
+        font-size: 15px;
+        color: rgb(90, 88, 89);
+        max-width: 70%;
+        text-align: center;
+        word-break: break-word;
+      }
+
+      button {
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        margin: 25px 0px 0px;
+        font-size: 15px;
+      }
+    }
+  }
+}

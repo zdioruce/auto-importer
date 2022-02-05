@@ -37,10 +37,6 @@ export default function PageLayout({ children }) {
     }
   }, []);
 
-  const handleShowProductImportMenu = useCallback(() => {
-    setShowProductImportMenu(true)
-  }, []);
-
   return (
     <>
         <Head>
@@ -67,7 +63,7 @@ export default function PageLayout({ children }) {
             />
         </Head>
         <SideBar
-          handleAddProducts={handleShowProductImportMenu}
+          handleAddProducts={() => setShowProductImportMenu(!showProductImportMenu)}
         />
         <AddProductsDropDown
           show={showProductImportMenu}

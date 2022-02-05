@@ -1,0 +1,33 @@
+.bxZhDT {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 60px;
+
+  svg {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+
+  svg path, svg rect, p {
+    transition: all 0.3s ease 0s;
+  }
+
+  svg path, svg rect {
+    fill: rgb(90, 88, 89);
+  }
+
+  p {
+    margin: 0px;
+    color: rgb(90, 88, 89);
+  }  
+}
+
+.bxZhDT:hover p{
+  color: rgb(228, 158, 76);
+}
+
+.bxZhDT:hover svg path, .bxZhDT:hover svg rect {
+  fill: rgb(228, 158, 76);
+}
