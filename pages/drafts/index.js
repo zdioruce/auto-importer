@@ -9,7 +9,7 @@ export default function Drafts() {
 
   const columns = [
     {
-      cell: row => <Image width='40px' height='40px' src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]}/>,
+      cell: row => <Image alt="product" width='40px' height='40px' src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]}/>,
       grow: 0,
     },
     {

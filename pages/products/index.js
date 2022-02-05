@@ -9,7 +9,7 @@ export default function Products() {
   const columns = [
     {
       cell: row => (
-        <Image width='40px' height='40px' src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]} onClick={() => handleClick(row.id)}/>
+        <Image alt="product" width='40px' height='40px' src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]} onClick={() => handleClick(row.id)}/>
       ),
       grow: 0,
     },

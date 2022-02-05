@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import SideBar from './SideBar'
 import AddProductsDropDown from './AddProductsDropDown'
 import SingleProductModal from './SingleProductModal'
