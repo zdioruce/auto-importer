@@ -79,7 +79,7 @@ export default function Drafts() {
                       <path fillRule="evenodd" clipRule="evenodd" d="M39 29C38.4477 29 38 29.4477 38 30V34H34C33.4477 34 33 34.4477 33 35V37C33 37.5523 33.4477 38 34 38H38V42C38 42.5523 38.4477 43 39 43H41C41.5523 43 42 42.5523 42 42V38H46C46.5523 38 47 37.5523 47 37V35C47 34.4477 46.5523 34 46 34H42V30C42 29.4477 41.5523 29 41 29H39Z" fill="#EA8C1F"></path>
                     </svg>
                   </div>
-                  <h3>You don't have any products yet...</h3>
+                  <h3>You don&apos;t have any products yet...</h3>
                   <p>Save time and start your first upload here!</p>
                   <button type="button" className="ant-btn ant-btn-primary ant-btn-lg" ant-click-animating-without-extra-node="false">
                     <span>Add Products</span>

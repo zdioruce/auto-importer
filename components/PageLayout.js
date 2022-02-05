@@ -20,7 +20,7 @@ export default function PageLayout({ children }) {
       pathname: '/predraft/[productID]',
       query: { productID }
     })  
-  }, []);
+  }, [router]);
 
   const handleMultiProductImport = useCallback(() => {
     

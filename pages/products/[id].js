@@ -20,7 +20,7 @@ export default function ProductDetail() {
         }
 
         fetchData();
-    }, [])
+    }, [id])
 
     function handleBack() {
         router.back()
