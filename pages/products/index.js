@@ -2,7 +2,7 @@ import styles from './styles.module.scss'
 import React, { useEffect, useState } from "react"
 import DataTable from 'react-data-table-component';
 import ProductDeleteModal from '../../components/ProductDeleteModal'
-
+import Image from 'next/image';
 export default function Products() {
 
   const customStyles = {
@@ -23,7 +23,7 @@ export default function Products() {
         <div style={{width: '260px', left: '36px', minWidth: '260px', maxWidth: '260px'}}>
           <div className={styles.eYCsDc}>
             <a target="_blank" rel="noreferrer" href={'/products/' + row.id}>
-              <img src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]} alt="prod-img"/>
+              <Image src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]} alt="prod-img" width='60px' height='60px'/>
             </a>
             <p>{row.title}</p>
           </div>          

@@ -2,6 +2,7 @@ import styles from './styles.module.scss'
 import React, { useEffect, useState } from "react"
 import DataTable from 'react-data-table-component';
 import SingleDraftDeleteModal from '../../components/SingleDraftDeleteModal'
+import Image from 'next/image';
 export default function Drafts() {
 
   const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
@@ -27,7 +28,7 @@ export default function Drafts() {
         cell: row => (      
           <div className={styles.eppMTg}>
             <div className={styles.ccTyjK}>
-              <img src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]} alt="product-pic" style={{transform: "rotate('0deg') scaleX(1) scaleY(1)"}}/>
+              <Image src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]} alt="product-pic" width='60px' height='60px' style={{transform: "rotate('0deg') scaleX(1) scaleY(1)"}}/>
               <div data-product-id="61ff4325440fc8fcbc29c696" data-store-id="55814" data-store-type="3" className={styles.info + " ellipsis"} style={{zIndex: 2}}>
                 <p className="ellipsis">{row.title}</p>
                 <div className={styles['info-sub']}>

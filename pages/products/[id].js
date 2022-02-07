@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
 import React, { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
-
+import Image from 'next/image'
 export default function ProductDetail() {
 
     const router = useRouter()
@@ -45,7 +45,7 @@ export default function ProductDetail() {
                     <span>Back</span>
                 </button>
                 <div data-product-id="61f866356fcab45f37ad45d8" data-store-id="55814" data-store-type="3" className={styles.iBeWfn}>
-                    <img src={data ? 'https://images-na.ssl-images-amazon.com/images/I/' + data.images.split(',')[0]: ''} alt="product-pic" style={{zIndex: 2}}/>
+                    <Image src={data ? 'https://images-na.ssl-images-amazon.com/images/I/' + data.images.split(',')[0]: ''} alt="product-pic" width='70px' height='70px' style={{zIndex: 2}}/>
                     <div>
                         <h6>{data ? data.title: ''}</h6>                        
                     </div>
