@@ -3,10 +3,10 @@ import { useState } from 'react';
 
 export default function SingleProductModal({show, handleClose, handleImport}) {
 
-    const [productID, setProductID] = useState('');
+    const [productIDs, setProductIDs] = useState([]);
 
     function handleChange(event) {
-        setProductID(event.target.value)
+        setProductIDs([event.target.value])
     }
 
     return show ? (
@@ -38,12 +38,12 @@ export default function SingleProductModal({show, handleClose, handleImport}) {
                                             </div>
                                         </div>
                                         <div className={styles.hRmKiD}>
-                                            <div>URL or Product ID</div>
-                                            <input placeholder="Enter URL or Product ID" type="text" className='ant-input ant-input-lg' value={productID} onChange={handleChange} />
+                                            <div>Product ID</div>
+                                            <input placeholder="Enter URL or Product ID" type="text" className='ant-input ant-input-lg' value={productIDs[0]} onChange={(e) => handleChange(e)} />
                                         </div>                                
                                         <div className={styles.JwezC} style={{marginTop: "30px"}}>
                                             <div className='ant-btn-group ant-btn-group-lg ant-dropdown-button'>
-                                                <button type="button" className='ant-btn ant-btn-primary' onClick={() => handleImport(productID)}>
+                                                <button disabled={productIDs.length == 0} type="button" className='ant-btn ant-btn-primary' onClick={() => handleImport(productIDs)}>
                                                     <span>Import</span>
                                                 </button>
                                             </div>

@@ -41,12 +41,14 @@
 
 .eEamKo.ant-skeleton {
   width: 70px;
-}
 
-.eEamKo.ant-skeleton .ant-skeleton-content .ant-skeleton-title{
-  height: 70px;
-  min-width: 70px;
-  max-width: 70px;
+  .ant-skeleton-content {
+    .ant-skeleton-title {
+      height: 70px;
+      min-width: 70px;
+      max-width: 70px;    
+    }
+  }
 }
 
 .bZIpjk > div {

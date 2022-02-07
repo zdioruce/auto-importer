@@ -71,7 +71,7 @@ export default async function handler(req, res) {
         .then(async (product) => {
             console.log(product)
             await excuteQuery({
-                query: 'UPDATE products SET status=1 WHERE id = ' + id,
+                query: 'UPDATE products SET shopify_product_id=' + product.id + ', status=1 WHERE id = ' + id,
                 values: [],
             });
 

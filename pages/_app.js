@@ -5,6 +5,9 @@ import '../styles/modal.css'
 import '../styles/input.css'
 import '../styles/button.css'
 import '../styles/skeleton.css'
+import '../styles/grid.css'
+import '../styles/radio.css'
+import '../styles/divider.css'
 import PageLayout from '../components/PageLayout'
 
 function MyApp({ Component, pageProps }) {

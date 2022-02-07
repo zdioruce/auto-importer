@@ -1,47 +1,90 @@
 import styles from './styles.module.scss'
 import React, { useEffect, useState } from "react"
 import DataTable from 'react-data-table-component';
-import Image from 'next/image';
-import { useRouter } from 'next/router'
+import ProductDeleteModal from '../../components/ProductDeleteModal'
 
 export default function Products() {
 
+  const customStyles = {
+    rows: {
+        style: {
+          height: '80px',
+          position: 'relative',
+          fontFamily: '"ProximaNova Regular", sans-serif',
+          borderBottom: '1px solid rgb(229, 229, 229)'
+        },
+    },
+  };
+
   const columns = [
     {
+      name: 'Name',
       cell: row => (
-        <Image alt="product" width='40px' height='40px' src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]} onClick={() => handleClick(row.id)}/>
+        <div style={{width: '260px', left: '36px', minWidth: '260px', maxWidth: '260px'}}>
+          <div className={styles.eYCsDc}>
+            <a target="_blank" rel="noreferrer" href={'/products/' + row.id}>
+              <img src={'https://images-na.ssl-images-amazon.com/images/I/' + row.images.split(',')[0]} alt="prod-img"/>
+            </a>
+            <p>{row.title}</p>
+          </div>          
+        </div>
       ),
-      grow: 0,
     },
     {
-        name: 'Title',
-        selector: row => row.title,
-        sortable: true,
-        wrap: true,
-    },    
+      name: 'Uploaded',
+      cell: row => (
+        <div style={{width: '120px', left: '296px', minWidth: '120px', maxWidth: '120px'}}>
+          {new Date(row.created_at).toLocaleDateString([], {year: "numeric", month: "short", day: "numeric"})}
+        </div>
+      )
+    },
+    {
+      cell: row => (
+        <div style={{width: '80px', left: '416px', minWidth: '80px', maxWidth: '80px'}}>
+          <div className="bKojHK">
+            <svg className="trash-icn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => handleProductDeleteModal(row.id)}>
+              <path fillRule="evenodd" clipRule="evenodd" d="M11 5H13V6H18V8H6V6H11V5ZM9 17V9H7V17C7 18.1046 7.89543 19 9 19H15C16.1046 19 17 18.1046 17 17V9H15V17H9Z" fill="#727272"></path>
+            </svg>
+          </div>
+        </div>
+      )
+    }    
   ];
 
-  const router = useRouter()
   const [data, setData] = useState([])
+  const [showProductDeleteModal, setShowProductDeleteModal] = useState(false)
+  const [productIDs, setProductIDs] = useState([])
 
   useEffect(() => {
-    async function fetchData() {
-      await fetch('/api/products')
-      .then(response => response.json())
-      .then(data => {
-        setData(data.result)
-      })   
-    }
-
     fetchData();
   }, [])
 
-  function handleClick(id) {
-    
-    router.push({
-      pathname: '/products/[id]',
-      query: { id }
+  async function fetchData() {
+    await fetch('/api/products')
+    .then(response => response.json())
+    .then(data => {
+      setData(data.result)
+    })   
+  }
+
+  async function handleDelete(option) {
+    console.log(option)
+    setShowProductDeleteModal(false)
+
+    await fetch('/api/products/delete/', {
+      method: 'post',
+      body: JSON.stringify({productIDs, option})
     })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      fetchData();
+    }) 
+  }
+
+  function handleProductDeleteModal(id) {
+    setProductIDs([id])
+    setShowProductDeleteModal(true)
   }
 
   return (
@@ -61,6 +104,7 @@ export default function Products() {
               columns={columns}
               data={data}
               selectableRows
+              customStyles={customStyles}
             /> :
             <div height="420" className={styles.iEWzQZ}>
               <div className={styles.gwIBEu}>
@@ -80,7 +124,13 @@ export default function Products() {
               </div>
             </div>  
         }
-      </div>
+      </div> 
+      <ProductDeleteModal
+        show={showProductDeleteModal}
+        handleClose={() => setShowProductDeleteModal(false)}
+        handleDelete={handleDelete}
+        count={productIDs.length}
+      />     
     </div>
   )
 }

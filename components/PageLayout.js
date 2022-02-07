@@ -13,18 +13,23 @@ export default function PageLayout({ children }) {
   const [showSingleProductModal, setShowSingleProductModal] = useState(false);
   const [showMultiProductModal, setShowMultiProductModal] = useState(false);
 
-  const handleSingleProductImport = useCallback((productID) => {
+  const handleSingleProductImport = useCallback((productIDs) => {
     setShowSingleProductModal(false)
 
     router.push({
-      pathname: '/predraft/[productID]',
-      query: { productID }
+      pathname: '/predraft/[productIDs]',
+      query: { productIDs }
     })  
   }, [router]);
 
-  const handleMultiProductImport = useCallback(() => {
+  const handleMultiProductImport = useCallback((productIDs) => {
+    setShowMultiProductModal(false)
     
-  }, []);
+    router.push({
+      pathname: '/predraft/[productIDs]',
+      query: { productIDs }
+    }) 
+  }, [router]);
 
   const handleProductImportMenu = useCallback((menu) => {
     setShowProductImportMenu(false)

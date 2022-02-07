@@ -1,6 +1,14 @@
 import styles from './SingleProductModal.module.scss'
+import { useState } from 'react';
 
 export default function MultiProductModal({show, handleClose, handleImport}) {
+    const [productIDs, setProductIDs] = useState([]);
+
+    function handleChange(event) {
+        console.log(event.target.value.split("\n"));
+        setProductIDs(event.target.value.split("\n"))
+    }
+
     return show ? (
         <div>
             <div className={styles.ant_modal_root}>
@@ -30,14 +38,14 @@ export default function MultiProductModal({show, handleClose, handleImport}) {
                                         </div>
                                     </div>
                                     <div className={styles.hRmKiD}>
-                                        <div>URL or Product ID
+                                        <div>Product ID
                                         <span> (For multiple products, click &lt;enter&gt; to separate them)</span>
                                         </div>
-                                        <textarea className={'ant-input textarea ' + styles.textarea} spellCheck="false"></textarea>
+                                        <textarea className={'ant-input textarea ' + styles.textarea} spellCheck="false" onChange={handleChange}></textarea>
                                     </div>                                
                                     <div className={styles.JwezC} style={{marginTop: "30px"}}>
                                         <div className='ant-btn-group ant-btn-group-lg ant-dropdown-button'>
-                                            <button disabled="" type="button" className='ant-btn ant-btn-primary' onClick={() => handleImport()}>
+                                            <button disabled={productIDs.length == 0} type="button" className='ant-btn ant-btn-primary' onClick={() => handleImport(productIDs)}>
                                                 <span>Import</span>
                                             </button>
                                         </div>

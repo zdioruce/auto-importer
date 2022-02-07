@@ -219,3 +219,35 @@
     }
   }
 }
+
+.eYCsDc {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+
+  img {
+    min-width: 60px;
+    max-width: 60px;
+    height: 60px;
+    object-fit: contain;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  p {
+    white-space: normal;
+    overflow: hidden;
+    font-family: "ProximaNova SemiBold", sans-serif;
+    margin: 0px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.jGrMLl {
+  height: 80px;
+  position: relative;
+  font-family: "Inter Regular", sans-serif;
+  border-bottom: 1px solid rgb(229, 229, 229);
+}
