@@ -1,0 +1,163 @@
+.dIqhFR {
+  transition: all 0.3s ease 0s;
+  transform: scaleY(1);
+  transform-origin: center top;
+  height: auto;
+  overflow: visible;
+  padding: 0px 26px 0px 70px;
+
+  .cHPnsn {
+    margin-top: 20px;
+  }
+}
+
+.zrVas .ant-tabs {
+  overflow: visible;
+  position: static;
+}
+
+.hAAzhb {
+  transition: all 0.3s ease 0s;
+  transform: scaleY(0);
+  transform-origin: center top;
+  height: 0px;
+  overflow: hidden;
+  padding: 0px 26px 0px 70px;
+}
+
+.gxiHCB {
+  padding: 20px 0px;
+  overflow-y: auto;
+  min-height: 384px;
+  max-height: 384px;
+}
+
+.egDxQG {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.egDxQG div {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.egDxQG div:first-child {
+  height: 24px;
+}
+
+.egDxQG div span {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  color: rgb(114, 114, 114);
+  font-size: 13px;
+}
+
+.egDxQG div:first-child > span {
+  margin: 0px 5px 0px 10px;
+}
+
+.iYUFFy {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  max-height: 304px;
+  overflow: auto;
+}
+
+.kJFhJx {
+  padding: 10px 10px 0px 0px;
+}
+
+.jbgjEw {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.jbgjEw .inline-dropdown p {
+  margin-right: 5px;
+}
+
+.jqZpcr {
+  position: relative;
+}
+
+.QBEDW {
+  height: 312px;
+  position: relative;
+}
+// tab 2
+.gYyuar {
+  min-height: 384px;
+  padding: 16px 0px 0px;
+}
+
+.gJGdtq {
+  padding: 0px 0px 16px 12px;
+  border-bottom: 1px solid rgb(229, 229, 229);
+  color: rgb(183, 183, 183);
+}
+
+.gJGdtq .ant-checkbox-wrapper {
+  margin-right: 10px;
+}
+
+.gJGdtq button {
+  height: 20px;
+}
+
+.dLmOkh {
+  max-height: 276px;
+  overflow-y: auto;
+}
+
+.bWUink {
+  background: rgb(242, 242, 242);
+  border: 1px solid rgb(229, 229, 229);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  padding-top: 100%;
+  position: relative;
+}
+
+.bWUink:hover {
+  border-color: rgb(255, 250, 240);
+}
+
+.bWUink div {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bWUink div svg path {
+  fill: rgb(183, 183, 183);
+}
+
+.bWUink:hover svg path {
+  fill: rgb(228, 158, 76);
+}
+
+.bWUink div p {
+  margin: 14px 0px 0px;
+  color: rgb(183, 183, 183);
+  transition: all 0.3s ease 0s;
+}
+
+.bWUink:hover p {
+  color: rgb(228, 158, 76);
+}

@@ -40,20 +40,22 @@ export default async function handler(req, res) {
                     sku: item.sku,
                     option1: item.option1,
                     option2: item.option2,
-                    barcode: item.barcode
+                    barcode: item.barcode,
+                    compare_at_price: item.price
                 })    
             }else{
                 variants.push({
                     sku: item.sku,
                     option1: item.option1,
-                    barcode: item.barcode
+                    barcode: item.barcode,
+                    compare_at_price: item.price
                 })    
             }
         })
 
         let images = []
         product[0].images.split(',').forEach(item => {
-            images.push({"src":"https://images-na.ssl-images-amazon.com/images/I/" + item})
+            images.push({"src":process.env.IMAGE_PATH + item})
         })
 
         shopify.product
@@ -69,10 +71,9 @@ export default async function handler(req, res) {
             "variants": variants
         })
         .then(async (product) => {
-            console.log(product)
             await excuteQuery({
-                query: 'UPDATE products SET shopify_product_id=' + product.id + ', status=1 WHERE id = ' + id,
-                values: [],
+                query: "UPDATE products SET shopify_product_id=?, handle=?, status=1 WHERE id = ?",
+                values: [product.id, product.handle, id],
             });
 
             res.status(200).json({ status: 1 })
@@ -83,7 +84,6 @@ export default async function handler(req, res) {
             res.status(200).json({ status: 0 })
         });
     } catch ( error ) {
-        console.log( error );
         res.status(500).json({ error })
     }
 }  

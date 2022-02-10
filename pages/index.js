@@ -1,15 +1,11 @@
 import styles from './Home.module.scss'
+import PageLayout from '@components/PageLayout'
 
 export default function Home() {
   return (
-    <div>
-      <div className={styles.cFZvyK}>
-        <div className='ant-row'>
-          <div className='ant-col ant-col-xl-12 ant-col-xxl-14'>
-            <h2>Dashboard</h2>
-          </div>
-        </div>
-      </div> 
+    <PageLayout
+      title={'Dashboard'}
+    >
       <div className={styles.haqgJi}>
         <div className={styles.gKkuNt}>
           <div className="ant-row" style={{margin: '-5px -12px'}}>
@@ -98,6 +94,6 @@ export default function Home() {
         </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }

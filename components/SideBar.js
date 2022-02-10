@@ -8,7 +8,6 @@ export default function SideBar({handleAddProducts}) {
   const [menu, setMenu] = useState(0)
 
   const handleMenu = useCallback((value) => {
-    console.log(value)
     if(value == 0)
       setMenu(1)
     else if(value == 1)

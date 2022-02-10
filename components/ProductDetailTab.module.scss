@@ -1,0 +1,26 @@
+
+.lavMwR {
+  overflow: hidden scroll;
+  min-height: calc(100vh - 383px);
+  max-height: calc(100vh - 383px);
+  padding: 20px 10px 0px 0px;
+
+  .modal-form label {
+    margin-bottom: 15px;
+  }  
+}
+
+
+.MNMZy {
+  position: relative;
+  margin-top: 10px;
+
+  span {
+    position: absolute;
+    left: 38px;
+    top: -27px;
+    font-size: 11px;
+    font-family: "Inter Regular", sans-serif;
+    color: rgb(183, 183, 183);
+  }
+}

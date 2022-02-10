@@ -5,7 +5,6 @@ export default function MultiProductModal({show, handleClose, handleImport}) {
     const [productIDs, setProductIDs] = useState([]);
 
     function handleChange(event) {
-        console.log(event.target.value.split("\n"));
         setProductIDs(event.target.value.split("\n"))
     }
 

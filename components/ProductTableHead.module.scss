@@ -1,0 +1,97 @@
+.dfBkFB {
+  border-bottom: 1px solid rgb(229, 229, 229);
+  border-top: 1px solid rgb(229, 229, 229);
+}
+
+.dfBkFB tr {
+  font-family: "Inter Regular", sans-serif;
+  height: 55px;
+}
+
+.dfBkFB tr th {
+  font-weight: 500;
+}
+
+.fixed {
+  position: sticky;
+  background: rgb(255, 255, 255);
+  z-index: 1;
+}
+
+.with-custom-heading th {
+  padding: 25px 10px 0px;
+}
+
+.fixed.last-fixed::before {
+  width: 1px;
+  background: rgb(229, 229, 229);
+  right: 0px;
+}
+
+.fixed.last-fixed::after, .fixed.last-fixed::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  top: 0px;
+  transition: all 0.3s ease 0s;
+}
+
+.fixed.last-fixed::after {
+  width: 6px;
+  background: linear-gradient(90deg, rgba(56, 64, 68, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+  right: -6px;
+}
+
+.fNoord {
+  cursor: pointer;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+
+  > div {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+
+    .sort-icons {
+      position: relative;
+      margin-left: 10px;
+    }
+  
+    .sort-icons .anticon {
+      position: absolute;
+      right: -10px;
+      top: 50%;
+    } 
+
+    .sort-icons .anticon-caret-up {
+      transform: translateY(-80%);
+    }
+        
+    .sort-icons .anticon-caret-down {
+      transform: translateY(-20%);
+    }
+  }
+
+  .custom-sort-icon {
+    margin-left: 10px;
+  }
+}
+
+.gMfxae {
+  cursor: pointer;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+}
+
+.gMfxae::before {
+  position: absolute;
+  display: block;
+  top: -25px;
+  left: 0px;
+  content: "Variations";
+  font-family: "Inter SemiBold", sans-serif;
+}

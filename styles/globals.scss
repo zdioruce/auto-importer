@@ -1,25 +1,45 @@
 @font-face {
-	font-family: "ProximaNova Regular";
-	src: url("/fonts/ProximaNova/ProximaNova-Regular.ttf");
+	font-family: "Inter Regular";
+	src: url("/fonts/Inter/Inter-Regular.ttf");
+}
+@font-face {
+	font-family: "Inter SemiBold";
+	src: url("/fonts/Inter/Inter-SemiBold.ttf");
+}
+@font-face {
+	font-family: "Inter Bold";
+	src: url("/fonts/Inter/Inter-Bold.ttf");
+}
+@font-face {
+	font-family: 'Rubik';
+	src: url('/fonts/Rubik/Rubik-Regular.ttf');
 	font-style: normal;
 	font-weight: 400;
-	font-display: swap;
 }
 @font-face {
-	font-family: "ProximaNova SemiBold";
-	src: url("/fonts/ProximaNova/ProximaNova-Semibold.ttf");
-	font-style: medium;
-	font-weight: 600;
-	font-display: swap;
-}
-@font-face {
-	font-family: "ProximaNova Bold";
-	src: url("/fonts/ProximaNova/ProximaNova-Bold.ttf");
+	font-family: 'Rubik';
+	src: url('/fonts/Rubik/Rubik-SemiBold.ttf');
 	font-style: normal;
-	font-weight: bold;
-	font-display: swap;
+	font-weight: 600;
 }
-
+@font-face {
+	font-family: 'Rubik';
+	src: url('/fonts/Rubik/Rubik-Italic.ttf');
+	font-style: italic;
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'Rubik';
+	src: url('/fonts/Rubik/Rubik-Bold.ttf');
+	font-style: normal;
+	font-weight: 700;
+}
+@font-face {
+	font-family: 'Rubik';
+	src: url('/fonts/Rubik/Rubik-BoldItalic.ttf');
+	font-style: italic;
+	font-weight: 700;
+}
 html,
 body {
 	--primary: #5a5859;
@@ -37,9 +57,9 @@ body {
 	--tooltip: #090e35;
 	--text: #727272;
 	--transition: all .3s;
-	--regular: 'ProximaNova Regular', sans-serif;
-	--semibold: 'ProximaNova SemiBold', sans-serif;
-	--bold: 'ProximaNova Bold', sans-serif;
+	--regular: 'Inter Regular', sans-serif;
+	--semibold: 'Inter SemiBold', sans-serif;
+	--bold: 'Inter Bold', sans-serif;
 	--rubik: 'Rubik', sans-serif;
 	--fz-28: 28px;
 	--fz-18: 18px;
