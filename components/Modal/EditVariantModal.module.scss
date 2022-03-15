@@ -1,0 +1,122 @@
+.jAYqUM {
+    width: 700px;
+}
+
+.jAYqUM .product-preview {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 8px;
+    background: rgb(242, 242, 242);
+}
+
+.jAYqUM .image {
+    position: relative;
+    border: 1px solid rgb(229, 229, 229);
+    background: rgb(255, 255, 255);
+    margin-right: 10px;
+}
+
+.jAYqUM .image img {
+    width: 50px;
+    height: 50px;
+    margin: 4px;
+    transition: all 0.3s ease 0s;
+    object-fit: contain;
+}
+
+.jAYqUM .description {
+    color: rgb(90, 88, 89);
+    padding-right: 10px;
+}
+
+.jAYqUM .description p {
+    font-family: "Inter SemiBold", sans-serif;
+    font-size: 15px;
+    max-width: 400px;
+}
+
+.jAYqUM .description .info {
+    font-family: "Inter Regular", sans-serif;
+    word-break: break-all;
+}
+
+.jAYqUM .description .info span {
+    white-space: nowrap;
+}
+
+.jAYqUM .description .info span:not(:last-child) {
+    margin-right: 8px;
+    padding-right: 8px;
+    border-right: 1px solid;
+}
+
+.jAYqUM .description .info span svg {
+    vertical-align: middle;
+    margin-top: -4px;
+}
+
+.jAYqUM .total-profit {
+    color: rgb(90, 88, 89);
+    margin-left: auto;
+    padding: 0px 20px;
+    border-left: 1px solid rgb(114, 114, 114);
+    text-align: center;
+    min-width: 110px;
+}
+
+.jAYqUM .total-profit p {
+    margin-bottom: 0px;
+}
+
+.jAYqUM footer {
+    border-top: 1px solid rgb(229, 229, 229);
+    padding-top: 25px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.ePbKfX .form-wrapper {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.ePbKfX .form-wrapper .input-wrapper {
+    flex: 0 1 130px;
+}
+
+.ePbKfX .round-cents {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.aihPd {
+    position: relative;
+}
+
+.aihPd:not(:last-child) {
+    margin-right: 60px;
+}
+
+.aihPd::after, .aihPd:not(:first-child)::before {
+    position: absolute;
+    top: 38px;
+    font-size: 15px;
+    font-family: "Inter Regular", sans-serif;
+}
+
+.aihPd:not(:first-child)::before {
+    content: "x";
+    left: -20px;
+}
+
+.aihPd::after {
+    content: "in.";
+    left: calc(100% + 4px);
+}

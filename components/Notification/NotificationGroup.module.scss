@@ -1,0 +1,13 @@
+.gIdkRj {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid rgb(229, 229, 229);
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px;
+}
+
+.gIdkRj > div:last-child{
+  border-bottom: none;
+}

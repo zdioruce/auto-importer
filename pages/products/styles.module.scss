@@ -1,5 +1,5 @@
 .zrVas {
-  padding: 0px 40px 20px;
+  padding: 0px 40px 65px;
   width: calc(100% - 220px);
   transition: all 0.3s ease 0s;
   margin-left: 220px;
@@ -209,4 +209,79 @@
   table {
     width: 100%;
   }
+}
+
+.gIdkRj {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid rgb(229, 229, 229);
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px;
+
+  div:last-child {
+    border-bottom: none;
+  }  
+}
+
+.eUXZOu {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 5px 15px 5px 20px;
+  position: relative;
+  color: rgb(90, 88, 89);
+  border-bottom: 1px solid rgb(229, 229, 229);
+  
+  svg {
+    min-width: 24px;
+    min-height: 24px;
+    margin-right: 5px;
+  }
+
+  span:last-child {
+    position: absolute;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+  }
+}
+
+.eUXZOu button {
+  height: 24px;
+}
+
+.eUXZOu button span {
+  color: rgb(38, 120, 217);
+}
+
+.fhZQmL {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+}
+
+.fhZQmL span {
+  cursor: pointer;
+  color: rgb(183, 183, 183);
+  transition: all 0.3s ease 0s;
+}
+
+.fhZQmL span:last-child {
+  height: 28px;
+}
+
+.spin-wrapper {
+  height: calc(100vh - 420px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

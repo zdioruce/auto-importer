@@ -1,0 +1,55 @@
+
+.eaIwdf .ant-col:first-child {
+  font-family: "Inter SemiBold", sans-serif;
+}
+
+.eaIwdf .ant-col:nth-child(2) {
+  color: rgb(90, 88, 89);
+}
+
+.eaIwdf .ant-col {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  font-size: 13px;
+  font-family: "Inter Regular", sans-serif;
+  color: rgb(90, 88, 89);
+  padding: 3px 20px;
+  border-bottom: 1px solid rgb(229, 229, 229);
+  min-height: 40px;
+}
+
+.eaIwdf .ant-col:first-child img {
+  min-width: 32px;
+  max-width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.eaIwdf .ant-col a {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  color: rgb(90, 88, 89);
+}
+
+.eaIwdf .ant-col svg {
+  min-width: 24px;
+  height: 24px;
+  margin-right: 3px;
+}
+
+.eaIwdf .ant-col a svg path {
+  fill: rgb(90, 88, 89);
+}
+
+.eaIwdf .ant-col .anticon-loading svg {
+  color: rgb(228, 158, 76);
+}
+
+.eaIwdf .ant-col .anticon-loading svg, .eaIwdf .ant-col .anticon-undo svg {
+  width: 16px;
+  height: 16px;
+}

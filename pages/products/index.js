@@ -1,163 +1,216 @@
 import styles from './styles.module.scss'
 import React, { useEffect, useState } from "react"
-import ProductDeleteModal from '@components/ProductDeleteModal'
-import PageLayout from '@components/PageLayout'
+import ProductDeleteModal from '@components/Modal/ProductDeleteModal'
 import NoProducts from '@components/NoProducts'
-import Loading from '@components/Loading'
-import ProductTableRow from '@components/ProductTableRow'
+import Spin from '@components/Spin'
+import ProductTableRow from '@components/Row/ProductTableRow'
 import ProductTableHead from '@components/ProductTableHead'
-import TablePagination from '@components/TablePagination'
+import Pagination from '@components/Pagination/Pagination'
+import NotificationGroup from '@components/Notification/NotificationGroup'
+import NotificationItem from '@components/Notification/NotificationItem'
+import CheckBox from '@components/Input/CheckBox'
+import TrashIcon from '@assets/TrachIcon'
+import { connect } from 'react-redux'
+import { getProducts, deleteProducts, selectProducts } from "@redux/actions/product"
+import { showProductDeleteModal, showHistoryModal } from "@redux/actions/modal"
+import { getHistory } from "@redux/actions/history"
+import { addNotification } from "@redux/actions/main"
 
-export default function Products() {
+function Products(props) {
 
-  const [showProductDeleteModal, setShowProductDeleteModal] = useState(false)
-  const [selectedProductIDs, setSelectProductIDs] = useState([])
-  const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
+  const {
+    getProducts, 
+    deleteProducts, 
+    showProductDeleteModal, 
+    showHistoryModal, 
+    selectProducts, 
+    getHistory,
+    addNotification
+  } = props
+  
+  const { 
+    productCount, 
+    products, 
+    loading, 
+    error, 
+    processingIds, 
+    selectedIds 
+  } = props.product
+  
+  const { 
+    productDeleteModal 
+  } = props.modal
+  
+  const { 
+    histories 
+  } = props.history
+  
+  const [show, setShow] = useState(10)
+  const [page, setPage] = useState(0)
+  const [productID, setProductID] = useState(null)
 
   useEffect(() => {
-    fetchData();
-  })
+    getHistory()
+    getProducts(page, show, 1)
+  }, [page, show, getHistory, getProducts])
 
-  async function fetchData() {
-    await fetch('/api/products')
-    .then(response => response.json())
-    .then(data => {
-      setData(data)
-    })   
-    .catch((error) => {
-      setError(error)
-    });
-  }
-
-  async function handleDelete(option) {
-    setShowProductDeleteModal(false)
-
-    await fetch('/api/products/delete/', {
-      method: 'post',
-      body: JSON.stringify({productIDs, option})
+  function handleDelete(option) {
+    showProductDeleteModal(false)
+    
+    let ids = selectedIds.length > 0? selectedIds: [productID]
+    deleteProducts(ids, option)
+    addNotification({
+      id: notifications.length,
+      message: ids.length + ' products were sent to be deleted'
     })
-    .then(response => response.json())
-    .then(data => {
-      fetchData()
-    }) 
-  }
-
-  function handleProductDeleteModal() {
-    setShowProductDeleteModal(true)
   }
 
   function handleCheck(id) {
-    if(selectedProductIDs.includes(id)){
-      const index = selectedProductIDs.indexOf(id);
-      if (index > -1) {
-        selectedProductIDs.splice(index, 1); // 2nd parameter means remove one item only
-      }
-    }else{
-      selectedProductIDs.push(id)
+    let ids = selectedIds
+    if(ids.includes(id)) {
+      var index = ids.indexOf(id);
+      if (index !== -1)
+        ids.splice(index, 1);
     }
-
-    setSelectProductIDs(selectedProductIDs)
+    else {
+      ids.push(id)
+    }
+    
+    selectProducts(ids)
   }
 
   function handleAllCheck() {
-    if(selectedProductIDs.length > 0){
-      setSelectProductIDs([])
+    if(selectedIds.length > 0){
+      selectProducts([])
     } else{
       let ids = []
-      data.result.map(element => {
+      products.map(element => {
         ids.push(element.id)
       })  
 
-      setSelectProductIDs(ids)
+      selectProducts(ids)
     }
   }
 
-  let title = null
   let content = null
   
   if (error) {
-    title = 'Products (0)'
     content = <div>failed to load</div>
   }
 
-  if (!data) {
-    title = 'Products (0)'
-    content = <Loading color={'#e49e4c'}/>
-  } else if(data.result.length == 0) {
-    title = 'Products (0)'
+  if (loading) {
+    content = <div className={styles['spin-wrapper']}>
+                <Spin/>
+              </div>
+  } else if(products.length == 0) {
     content = <NoProducts/>
   } else {
-    title = 'Products (' + data.result.length + ')'
-    let rows = []
-    data.result.forEach((element, index) => {
-      rows.push(
-        <ProductTableRow 
-          key={index} 
-          check={selectedProductIDs.includes(element.id)}
-          item={element}
-          handleCheck={handleCheck}
-        />
-      )
-    }) 
-
-    content = <div>
-                <table>
-                  <ProductTableHead/>
-                  <tbody>
-                    {rows}
-                  </tbody>
-                </table>
-                {/* <TablePagination/> */}
-              </div>
+    content = <>
+                <div className={styles.bJBQtm + ' with-custom-heading'}>
+                  <table>
+                    <ProductTableHead/>
+                    <tbody>
+                      {
+                        products && products.map((element, index) => (
+                          <ProductTableRow 
+                            key={index} 
+                            check={selectedIds.includes(element.id)}
+                            loading={processingIds.includes(element.id)}
+                            item={element}
+                            handleCheck={handleCheck}
+                            handleDelete={() => {              
+                              showProductDeleteModal(true)
+                              setProductID(element.id)
+                            }}
+                          />
+                        ))
+                      }
+                    </tbody>
+                  </table>
+                </div>
+                {/* <Pagination
+                  show={show}
+                  total={productCount}
+                  page={page}
+                  handlePage={(value) => {
+                    setPage(value)
+                    getProducts(value, show, 1)
+                  }}
+                  handleShow={(value) => {
+                    setShow(value)
+                    getProducts(page, value, 1)
+                  }}
+                /> */}
+              </>
   }
 
   return (
-    <PageLayout
-      title={title}
-    >
-      <div className={styles.zrVas}>
-        <div className={styles.iwrWXZ}>
-          <div>
-            <div className={styles.hFzCJJ}>
-              <label className="ant-checkbox-wrapper">
-                <span className={selectedProductIDs.length > 0? "ant-checkbox ant-checkbox-indeterminate": "ant-checkbox"}>
-                  <input type="checkbox" className="ant-checkbox-input" value="" checked="" onChange={handleAllCheck}/>
-                  <span className="ant-checkbox-inner"></span>
-                </span>
-              </label>
-              <p className={selectedProductIDs.length > 0? styles.checked: ''}>
-                {selectedProductIDs.length > 0? selectedProductIDs.length + ' Items Selected': '0 Results Selected'}
-              </p>
-              {
-                selectedProductIDs.length > 0?
-                <span onClick={handleProductDeleteModal}>
-                  <svg className="trash-icn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M11 5H13V6H18V8H6V6H11V5ZM9 17V9H7V17C7 18.1046 7.89543 19 9 19H15C16.1046 19 17 18.1046 17 17V9H15V17H9Z" fill="#727272"></path>
-                  </svg>
-                </span> : null
-              }
-            </div>
-            {/* <div className="fhZQmL">
-              <span>View History</span>
-              <span>
-                <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M8 8C8 7.44772 8.44772 7 9 7C9.55228 7 10 7.44772 10 8V16C10 16.5523 9.55228 17 9 17C8.44772 17 8 16.5523 8 16V8ZM12 8C12 7.44772 12.4477 7 13 7C13.5523 7 14 7.44772 14 8V16C14 16.5523 13.5523 17 13 17C12.4477 17 12 16.5523 12 16V8ZM17 7C16.4477 7 16 7.44772 16 8V16C16 16.5523 16.4477 17 17 17C17.5523 17 18 16.5523 18 16V8C18 7.44772 17.5523 7 17 7Z" fill="#B7B7B7"></path>
-                </svg>
+    <div className={styles.zrVas}>
+      {
+        histories.length > 0 &&
+        <NotificationGroup>
+          {
+            histories.map((element, index) => (
+              <NotificationItem
+                key={index}
+                data={element}
+              />
+            ))
+          }      
+        </NotificationGroup>
+      }
+      <div className={styles.iwrWXZ}>
+        <div>
+          <div className={styles.hFzCJJ}>
+            <CheckBox
+              check={selectedIds.length > 0}
+              indeterminate={selectedIds.length != products.length}         
+              handleCheck={handleAllCheck}
+            />
+            <p className={selectedIds.length > 0? styles.checked: ''}>
+              {selectedIds.length > 0? `${selectedIds.length} Items Selected`: '0 Results Selected'}
+            </p>
+            {
+              selectedIds.length > 0 &&
+              <span onClick={() => showProductDeleteModal(true)}>
+                <TrashIcon/>
               </span>
-            </div> */}
+            }
+          </div>
+          <div className={styles.fhZQmL}>
+            <span onClick={() => showHistoryModal(true)}>View History</span>
           </div>
         </div>
-        <div id="products-table" className={styles.bJBQtm + ' with-custom-heading'}>
-          {content}
-        </div>        
-        <ProductDeleteModal
-          show={showProductDeleteModal}
-          handleClose={() => setShowProductDeleteModal(false)}
+      </div>      
+      {content}
+      {
+        productDeleteModal &&
+        <ProductDeleteModal        
+          handleClose={() => showProductDeleteModal(false)}
           handleDelete={handleDelete}
-          count={selectedProductIDs.length}
+          count={selectedIds.length}
         />     
-      </div> 
-    </PageLayout>   
+      } 
+    </div> 
   )
 }
+
+
+const mapStateToProps = state => ({
+  product: state.product,
+  modal: state.modal,
+  history: state.history,
+  main: state.main
+})
+
+const mapDispatchToProps = {
+  getProducts, 
+  deleteProducts, 
+  showProductDeleteModal, 
+  getHistory, 
+  showHistoryModal, 
+  selectProducts, 
+  addNotification
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products)

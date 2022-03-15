@@ -1,0 +1,83 @@
+.dLRaBU {
+  min-width: 1120px;
+}
+
+.LEbTb {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+
+  h2 {
+    text-transform: capitalize;
+  }
+}
+
+.kgfuOx {
+  min-height: 560px;
+  height: 560px;
+  position: relative;
+}
+
+.eressM {
+  font-size: 13px;
+  color: rgb(90, 88, 89);
+  border-bottom: 1px solid rgb(229, 229, 229);
+
+  div {
+    padding: 10px 0px;
+  }
+}
+
+.dTEJCg {
+  max-height: 516px;
+  overflow: hidden scroll;
+  margin: 0px -8px;
+}
+
+.iWlQcX {
+  font-family: "Inter Regular", sans-serif;
+  font-size: 13px;
+  color: rgb(90, 88, 89);
+  border-bottom: 1px solid rgb(229, 229, 229);
+  padding: 10px 0px;
+}
+
+.iWlQcX .ant-col:last-child {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding-right: 15px !important;
+}
+
+.iWlQcX .ant-col:last-child span:last-child {
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgb(38, 120, 217);
+}
+
+.iwCMAk > div {
+  border-bottom: 1px solid rgb(229, 229, 229);
+}
+
+.iwCMAk > div:first-child {
+  padding: 10px 8px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.iwCMAk > div:first-child:hover span, .iwCMAk > div:first-child.active span {
+  color: rgb(228, 158, 76);
+}
+
+.iwCMAk > div:first-child span {
+  font-size: 13px;
+  color: rgb(90, 88, 89);
+  margin-left: 10px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+}
+

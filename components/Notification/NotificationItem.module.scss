@@ -1,0 +1,53 @@
+.gIdkRj {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid rgb(229, 229, 229);
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px;
+}
+
+.gIdkRj > div:last-child {
+  border-bottom: none;
+}
+
+.eUXZOu {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 5px 15px 5px 20px;
+  position: relative;
+  color: rgb(90, 88, 89);
+  border-bottom: 1px solid rgb(229, 229, 229);
+}
+
+.eUXZOu > svg {
+  min-width: 24px;
+  min-height: 24px;
+  margin-right: 5px;
+}
+
+.eUXZOu button {
+  height: 24px;
+}
+
+.eUXZOu button span {
+  color: rgb(38, 120, 217);
+}
+
+.eUXZOu > span:last-child {
+  position: absolute;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.eUXZOu > span:last-child svg path {
+  fill: rgb(183, 183, 183);
+}

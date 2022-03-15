@@ -1,0 +1,32 @@
+.iMpmEY {
+  width: 340px;
+
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    margin-bottom: 20px;
+    color: rgb(90, 88, 89);
+    font-size: 13px;
+  }
+
+  div:not(.semi-bold) {
+    border-top: 1px solid rgb(229, 229, 229);
+  }
+  
+  div {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding-top: 20px;
+  }
+
+  button {
+    font-size: 13px;
+
+    span {
+      margin: 0px;
+    }
+  }
+}

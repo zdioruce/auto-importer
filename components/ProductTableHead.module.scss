@@ -18,7 +18,7 @@
   z-index: 1;
 }
 
-.with-custom-heading th {
+.th {
   padding: 25px 10px 0px;
 }
 
@@ -94,4 +94,29 @@
   left: 0px;
   content: "Variations";
   font-family: "Inter SemiBold", sans-serif;
+}
+
+.gMfxae > div {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.gMfxae > div .sort-icons {
+  position: relative;
+  margin-left: 10px;
+}
+
+.gMfxae > div .sort-icons .anticon-caret-up {
+  transform: translateY(-80%);
+}
+
+.gMfxae > div .sort-icons .anticon-caret-down {
+  transform: translateY(-20%);
+}
+
+.gMfxae > div .sort-icons .anticon {
+  position: absolute;
+  right: -10px;
+  top: 50%;
 }

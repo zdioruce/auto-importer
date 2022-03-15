@@ -1,0 +1,66 @@
+.bDKnMC {
+    width: 1120px;
+}
+
+.bDKnMC > p {
+    color: rgb(90, 88, 89);
+    margin: 0px 0px 5px;
+}
+
+.bDKnMC .ant-tabs-content {
+    min-height: 440px;
+    position: relative;
+}
+
+.cutvFw {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.cutvFw h2 {
+    position: relative;
+    margin-right: 22px;
+}
+
+.cutvFw h2::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -14px;
+    width: 1px;
+    height: 19px;
+    background: rgb(183, 183, 183);
+}
+
+.cutvFw div {
+    margin-bottom: 20px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 13px;
+    font-family: "Inter Regular", sans-serif;
+    color: rgb(90, 88, 89);
+}
+
+.cutvFw div svg {
+    margin-right: 6px;
+}
+
+.cutvFw div:last-child {
+    margin-left: auto;
+}
+
+.dibOVc {
+    max-height: 400px;
+    height: 100%;
+    overflow: hidden auto;
+}
+
+.spin-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

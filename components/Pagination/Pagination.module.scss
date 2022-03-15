@@ -1,0 +1,33 @@
+.dGGvnC {
+  margin: 20px 0px;
+  position: absolute;
+  bottom: 0px;
+  left: 40px;
+  width: calc(100% - 160px);
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.dGGvnC .ant-pagination .ant-pagination-prev a, .dGGvnC .ant-pagination .ant-pagination-next a, .dGGvnC .ant-pagination .ant-pagination-item:not(.ant-pagination-item-active) {
+  line-height: 33px;
+  border: none;
+  font-size: 13px;
+  color: rgb(114, 114, 114);
+  background: transparent;
+}
+
+.dGGvnC .ant-pagination .ant-pagination-prev a i, .dGGvnC .ant-pagination .ant-pagination-next a i, .dGGvnC .ant-pagination .ant-pagination-item:not(.ant-pagination-item-active) i, .dGGvnC .ant-pagination .ant-pagination-prev a a, .dGGvnC .ant-pagination .ant-pagination-next a a, .dGGvnC .ant-pagination .ant-pagination-item:not(.ant-pagination-item-active) a {
+  transition: all 0.3s ease 0s;
+  color: rgb(90, 88, 89);
+}
+
+.dGGvnC .ant-pagination .ant-pagination-item-active {
+  background: rgb(228, 158, 76);
+}
+
+.dGGvnC .ant-pagination .ant-pagination-item-active a {
+  color: rgb(255, 255, 255);
+}

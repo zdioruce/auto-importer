@@ -1,0 +1,96 @@
+
+.gZoLZH {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  border: 1px solid rgb(228, 158, 76);
+  transition: all 0.3s ease 0s;
+  opacity: 1;
+  overflow: hidden;
+  background: rgb(255, 255, 255);
+  padding: 10px;
+  min-height: 262px;
+
+  .gZoLZH .img {
+    width: 100%;
+    min-width: 200px;
+    min-height: 200px;
+    max-height: 240px;
+    object-fit: contain;
+    transition: all 0.3s ease 0s;
+    transform: rotate(0deg) scaleX(1) scaleY(1);
+  }
+}
+
+.gZoLZH:hover {
+  border-color: rgb(183, 183, 183);
+  cursor: move;
+}
+
+.gZoLZH::before {
+  opacity: 1;
+  visibility: visible;
+  content: "Main image";
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 30px;
+  color: rgb(255, 255, 255);
+  background: rgba(234, 140, 31, 0.9);
+  padding: 6px 0px;
+  transition: all 0.3s ease 0s;
+  z-index: 1;
+}
+
+.gZoLZH .ant-checkbox-wrapper {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  z-index: 1;
+}
+
+.bfMcOI {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  border: 1px solid rgb(229, 229, 229);
+  transition: all 0.3s ease 0s;
+  opacity: 1;
+  overflow: hidden;
+  background: rgb(255, 255, 255);
+  padding: 10px;
+  min-height: 262px;
+}
+
+.bfMcOI .ant-checkbox-wrapper {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  z-index: 1;
+}
+
+.bfMcOI:hover {
+  border-color: rgb(183, 183, 183);
+  cursor: move;
+}
+
+.bfMcOI::before {
+  opacity: 0;
+  visibility: hidden;
+  content: "Main image";
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 30px;
+  color: rgb(255, 255, 255);
+  background: rgba(234, 140, 31, 0.9);
+  padding: 6px 0px;
+  transition: all 0.3s ease 0s;
+  z-index: 1;
+}

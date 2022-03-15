@@ -1,0 +1,151 @@
+
+.gxiHCB {
+  padding: 20px 0px;
+  overflow-y: auto;
+  min-height: 384px;
+  max-height: 384px;
+}
+
+.iEyGNo {
+  padding: 20px 0px;
+  overflow-y: auto;
+  min-height: 384px;
+  max-height: calc(100vh - 275px);
+}
+
+.egDxQG {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.egDxQG div {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.egDxQG div:first-child {
+  height: 24px;
+}
+
+.egDxQG div span {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  color: rgb(114, 114, 114);
+  font-size: 13px;
+}
+
+.egDxQG div:first-child > span {
+  margin: 0px 5px 0px 10px;
+}
+
+.gHsaWi {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.gHsaWi div {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.gHsaWi div:first-child {
+  height: 24px;
+}
+
+.gHsaWi div .ant-checkbox-wrapper {
+  transform: translateY(1px);
+}
+
+.gHsaWi div:first-child > span {
+  margin: 0px 5px 0px 10px;
+}
+
+.gHsaWi div span {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  color: rgb(90, 88, 89);
+  font-size: 13px;
+}
+
+.gHsaWi div:not(:first-child) span {
+  margin-right: 5px;
+}
+
+.gHsaWi div span svg {
+  cursor: pointer;
+  height: 24px;
+}
+
+.gHsaWi div span.disabled svg {
+  cursor: auto;
+}
+
+.gHsaWi div span svg path {
+  transition: all 0.3s ease 0s;
+  fill: rgb(90, 88, 89);
+}
+
+.gHsaWi div span.disabled svg path {
+  fill: rgb(90, 88, 89);
+}
+
+.iYUFFy {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  max-height: 304px;
+  overflow: auto;
+}
+
+
+.bWUink {
+  background: rgb(242, 242, 242);
+  border: 1px solid rgb(229, 229, 229);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  padding-top: 100%;
+  position: relative;
+}
+
+.bWUink:hover {
+  border-color: rgb(255, 250, 240);
+}
+
+.bWUink div {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bWUink div svg path {
+  fill: rgb(183, 183, 183);
+}
+
+.bWUink:hover svg path {
+  fill: rgb(228, 158, 76);
+}
+
+.bWUink div p {
+  margin: 14px 0px 0px;
+  color: rgb(183, 183, 183);
+  transition: all 0.3s ease 0s;
+}
+
+.bWUink:hover p {
+  color: rgb(228, 158, 76);
+}

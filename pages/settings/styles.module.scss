@@ -1,0 +1,148 @@
+.zrVas {
+  width: calc(100% - 220px);
+  margin-left: 220px;
+  padding: 0px 40px 20px;
+}
+
+.fgBQOc {
+  border-bottom: 1px solid rgb(229, 229, 229);
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+}
+
+.fgBQOc h6 {
+  font-family: "Inter Bold", sans-serif;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.gxAOOz {
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 15%) 0px 3px 6px;
+  border: 1px solid rgb(229, 229, 229);
+  padding: 15px;
+}
+
+.gxAOOz > div {
+  position: relative;
+}
+
+.gxAOOz > div:first-child {
+  flex: 1 1 100%;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.gxAOOz > div:last-child {
+    gap: 1rem;
+}
+
+.gxAOOz > div:first-child .cost, .gxAOOz > div:first-child .profit, .gxAOOz > div:first-child .add-profit {
+  position: relative;
+  height: 60px;
+}
+
+.gxAOOz > div:first-child .cost {
+    width: 76.746%;
+    min-width: 90px;
+}
+
+.gxAOOz > div:first-child .cost::before {
+  background: rgb(183, 183, 183);
+}
+
+
+.gxAOOz > div:first-child .profit {
+  width: 23.0238%;
+  min-width: min-content;
+  padding-right: 3px;
+}
+
+.gxAOOz > div:first-child .profit p {
+  margin-bottom: 15px;
+}
+
+.gxAOOz > div:first-child .profit::before {
+  background: rgb(89, 206, 136);
+}
+
+.gxAOOz > div:first-child .add-profit {
+    width: 0.230238%;
+    min-width: min-content;
+    padding-top: 34px;
+}
+
+.gxAOOz > div:first-child .add-profit::before {
+  color: white;
+  background: repeating-linear-gradient(45deg, rgb(89, 206, 136), rgb(89, 206, 136) 5px, rgb(255, 255, 255) 0px, rgb(255, 255, 255) 7px);
+}
+
+.gxAOOz > div:first-child .cost::before, .gxAOOz > div:first-child .profit::before, .gxAOOz > div:first-child .add-profit::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 20px;
+  left: 0px;
+  height: 15px;
+  width: calc(100% - 1px);
+}
+
+.gxAOOz > div p, .gxAOOz > div span {
+  font-size: 13px;
+  font-family: "Inter SemiBold", sans-serif;
+}
+
+.gxAOOz > div p {
+  color: rgb(90, 88, 89);
+}
+
+.gxAOOz > div:first-child .cost p {
+  margin-bottom: 15px;
+}
+
+.gxAOOz > div p, .gxAOOz > div span {
+  font-size: 13px;
+  font-family: "Inter SemiBold", sans-serif;
+}
+
+.gxAOOz > div span {
+    color: rgb(183, 183, 183);
+}
+
+.gxAOOz > div:last-child .braces {
+    position: relative;
+    margin-left: 0.25rem;
+}
+
+.gxAOOz > div:last-child > * {
+    flex: 1 1 auto;
+}
+
+.gxAOOz > div:last-child .braces svg {
+    position: absolute;
+    top: -8px;
+}
+
+.gxAOOz > div:last-child .with-plus, .gxAOOz > div:last-child .with-equal {
+  padding-left: 1rem;
+  text-align: center;
+  position: relative;
+  font-size: 20px;
+  color: rgb(90, 88, 89);
+}
+
+.gxAOOz > div:last-child .with-plus::before {
+  content: "+";
+}
+
+.gxAOOz > div:last-child .with-plus::before, .gxAOOz > div:last-child .with-equal::before {
+  position: absolute;
+  font-size: 18px;
+  left: 0px;
+  top: 4px;
+  color: rgb(90, 88, 89);
+}
+
+.gxAOOz > div:last-child .with-equal::before {
+  content: "=";
+}
