@@ -18,7 +18,9 @@ import {
   showMultiProductModal, 
   showHistoryItemsModal, 
   showHistoryModal, 
-  showEditVariantModal 
+  showEditVariantModal,
+  showStoreListModal,
+  showAddStoreModal
 } from "@redux/actions/modal"
 
 import { 
@@ -41,6 +43,8 @@ import EditVariantModal from './Modal/EditVariantModal'
 import SelectDropDown from './Select/SelectDropDown'
 import ProductImportDropDown from './DropDown/ProductImportDropDown'
 import NotificationToolTipItem from './Notification/NotificationToolTipItem'
+import StoreListModal from './Modal/StoreListModal'
+import AddStoreModal from './Modal/AddStoreModal'
 
 function PageLayout(props) {
 
@@ -58,7 +62,9 @@ function PageLayout(props) {
     updateSelect,
     showEditVariantModal,
     setMenu,
-    addNotification
+    addNotification,
+    showStoreListModal,
+    showAddStoreModal
   } = props
 
   const {
@@ -72,7 +78,9 @@ function PageLayout(props) {
     historyItemsModal, 
     historyModal, 
     addImageModal, 
-    editVariantModal
+    editVariantModal,
+    storeListModal,
+    addStoreModal 
   } = props.modal
 
   const { 
@@ -82,8 +90,8 @@ function PageLayout(props) {
   } = props.menu
 
   const {
-    draftCount,
-    productCount
+    allDraftIds,
+    allProductIds
   } = props.product
 
   useEffect(() => {
@@ -116,19 +124,7 @@ function PageLayout(props) {
       message: 'Items is being added to Drafts.'
     })
 
-    let ids = []
-    for(let i = 0; i < productIDs.length; i++) {
-      ids.push(productIDs[i])
-
-      if(i == productIDs.length - 1) {
-        console.log('ids =', ids)
-        createProducts(uploadVariations, ids, action)
-      }else if(ids.length == 5) {
-        createProducts(uploadVariations, ids, action)
-        console.log('ids =', ids)
-        ids = []
-      } 
-    }    
+    createProducts(uploadVariations, productIDs, action)
   };
 
   const handleProductImportMenu = (index) => {
@@ -214,9 +210,9 @@ function PageLayout(props) {
   if(menu == 0) {
     title = 'Dashboard'
   } else if(menu == 1) {
-    title = 'Products (' + productCount + ')'
+    title = 'Products (' + allProductIds.length + ')'
   } else if(menu == 2) {
-    title = 'Upload (' + draftCount + ')'
+    title = 'Upload (' + allDraftIds.length + ')'
   } else if(menu == 3) {
     title = 'Settings'
   } else if(menu == 4) {
@@ -249,6 +245,7 @@ function PageLayout(props) {
             as="font"
             crossOrigin=""
           />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       </Head>
       <div id="notifications">
         <div>
@@ -262,149 +259,6 @@ function PageLayout(props) {
                   />
                 ))
               }
-              {/* <div className="ant-notification-notice ant-notification-notice-closable success">
-                <div className="ant-notification-notice-content">
-                  <div className="ant-notification-notice-with-icon">
-                    <span className="ant-notification-notice-icon">
-                      <svg className="colored" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM14.2318 8.35984C14.5853 7.93556 15.2159 7.87824 15.6402 8.2318C16.0644 8.58537 16.1218 9.21593 15.7682 9.64021L10.7682 15.6402C10.5883 15.856 10.326 15.9863 10.0453 15.999C9.76462 16.0117 9.49154 15.9058 9.29287 15.7071L7.29287 13.7071C6.90234 13.3166 6.90234 12.6834 7.29287 12.2929C7.68339 11.9024 8.31656 11.9024 8.70708 12.2929L9.93278 13.5186L14.2318 8.35984Z" fill="#5FC287"></path>
-                      </svg>
-                    </span>
-                    <div className="ant-notification-notice-message">
-                      <span className="ant-notification-notice-message-single-line-auto-margin"></span>
-                      Pampers Swaddlers Disposable B... started to import
-                    </div>
-                    <div className="ant-notification-notice-description"></div>
-                  </div>
-                </div>
-                <a tabindex="0" className="ant-notification-notice-close">
-                  <span className="ant-notification-close-x">
-                    <svg className="close-icn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711L13.4142 12L16.7071 15.2929C17.0976 15.6834 17.0976 16.3166 16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071L12 13.4142L8.70711 16.7071C8.31658 17.0976 7.68342 17.0976 7.29289 16.7071C6.90237 16.3166 6.90237 15.6834 7.29289 15.2929L10.5858 12L7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L12 10.5858L15.2929 7.29289Z" fill="#727272"></path>
-                    </svg>
-                  </span>
-                </a>
-              </div>
-              <div className="ant-notification-notice ant-notification-notice-closable success">
-                <div className="ant-notification-notice-content">
-                  <div className="ant-notification-notice-with-icon">
-                    <span className="ant-notification-notice-icon">
-                      <svg className="colored" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM14.2318 8.35984C14.5853 7.93556 15.2159 7.87824 15.6402 8.2318C16.0644 8.58537 16.1218 9.21593 15.7682 9.64021L10.7682 15.6402C10.5883 15.856 10.326 15.9863 10.0453 15.999C9.76462 16.0117 9.49154 15.9058 9.29287 15.7071L7.29287 13.7071C6.90234 13.3166 6.90234 12.6834 7.29287 12.2929C7.68339 11.9024 8.31656 11.9024 8.70708 12.2929L9.93278 13.5186L14.2318 8.35984Z" fill="#5FC287"></path>
-                      </svg>
-                    </span>
-                    <div className="ant-notification-notice-message">
-                      <span className="ant-notification-notice-message-single-line-auto-margin"></span>
-                      Diapers Size 2, 186 Count - Pa... started to import
-                    </div>
-                    <div className="ant-notification-notice-description"></div>
-                  </div>
-                </div>
-                <a tabindex="0" className="ant-notification-notice-close">
-                  <span className="ant-notification-close-x">
-                    <svg className="close-icn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711L13.4142 12L16.7071 15.2929C17.0976 15.6834 17.0976 16.3166 16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071L12 13.4142L8.70711 16.7071C8.31658 17.0976 7.68342 17.0976 7.29289 16.7071C6.90237 16.3166 6.90237 15.6834 7.29289 15.2929L10.5858 12L7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L12 10.5858L15.2929 7.29289Z" fill="#727272"></path>
-                    </svg>
-                  </span>
-                </a>
-              </div>
-              <div className="ant-notification-notice ant-notification-notice-closable success">
-                <div className="ant-notification-notice-content">
-                  <div className="ant-notification-notice-with-icon">
-                    <span className="ant-notification-notice-icon">
-                      <svg className="colored" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM14.2318 8.35984C14.5853 7.93556 15.2159 7.87824 15.6402 8.2318C16.0644 8.58537 16.1218 9.21593 15.7682 9.64021L10.7682 15.6402C10.5883 15.856 10.326 15.9863 10.0453 15.999C9.76462 16.0117 9.49154 15.9058 9.29287 15.7071L7.29287 13.7071C6.90234 13.3166 6.90234 12.6834 7.29287 12.2929C7.68339 11.9024 8.31656 11.9024 8.70708 12.2929L9.93278 13.5186L14.2318 8.35984Z" fill="#5FC287"></path>
-                      </svg>
-                    </span>
-                    <div className="ant-notification-notice-message">
-                      <span className="ant-notification-notice-message-single-line-auto-margin"></span>
-                      12 products were sent to be deleted
-                    </div>
-                    <div className="ant-notification-notice-description"></div>
-                  </div>
-                </div>
-                <a tabindex="0" className="ant-notification-notice-close">
-                  <span className="ant-notification-close-x">
-                    <svg className="close-icn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711L13.4142 12L16.7071 15.2929C17.0976 15.6834 17.0976 16.3166 16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071L12 13.4142L8.70711 16.7071C8.31658 17.0976 7.68342 17.0976 7.29289 16.7071C6.90237 16.3166 6.90237 15.6834 7.29289 15.2929L10.5858 12L7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L12 10.5858L15.2929 7.29289Z" fill="#727272"></path>
-                    </svg>
-                  </span>
-                </a>
-              </div>
-              <div className="ant-notification-notice ant-notification-notice-closable success">
-                <div className="ant-notification-notice-content">
-                  <div className="ant-notification-notice-with-icon">
-                    <span className="ant-notification-notice-icon">
-                      <svg className="colored" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM14.2318 8.35984C14.5853 7.93556 15.2159 7.87824 15.6402 8.2318C16.0644 8.58537 16.1218 9.21593 15.7682 9.64021L10.7682 15.6402C10.5883 15.856 10.326 15.9863 10.0453 15.999C9.76462 16.0117 9.49154 15.9058 9.29287 15.7071L7.29287 13.7071C6.90234 13.3166 6.90234 12.6834 7.29287 12.2929C7.68339 11.9024 8.31656 11.9024 8.70708 12.2929L9.93278 13.5186L14.2318 8.35984Z" fill="#5FC287"></path>
-                      </svg>
-                    </span>
-                    <div className="ant-notification-notice-message">
-                      <span className="ant-notification-notice-message-single-line-auto-margin"></span>
-                      Item is being added to Drafts.
-                    </div>
-                    <div className="ant-notification-notice-description"></div>
-                  </div>
-                </div>
-                <a tabindex="0" className="ant-notification-notice-close">
-                  <span className="ant-notification-close-x">
-                    <svg className="close-icn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711L13.4142 12L16.7071 15.2929C17.0976 15.6834 17.0976 16.3166 16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071L12 13.4142L8.70711 16.7071C8.31658 17.0976 7.68342 17.0976 7.29289 16.7071C6.90237 16.3166 6.90237 15.6834 7.29289 15.2929L10.5858 12L7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L12 10.5858L15.2929 7.29289Z" fill="#727272"></path>
-                    </svg>
-                  </span>
-                </a>
-              </div>
-              <div className="ant-notification-notice ant-notification-notice-closable success">
-                <div className="ant-notification-notice-content">
-                  <div className="ant-notification-notice-with-icon">
-                    <span className="ant-notification-notice-icon">
-                      <svg className="colored" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM14.2318 8.35984C14.5853 7.93556 15.2159 7.87824 15.6402 8.2318C16.0644 8.58537 16.1218 9.21593 15.7682 9.64021L10.7682 15.6402C10.5883 15.856 10.326 15.9863 10.0453 15.999C9.76462 16.0117 9.49154 15.9058 9.29287 15.7071L7.29287 13.7071C6.90234 13.3166 6.90234 12.6834 7.29287 12.2929C7.68339 11.9024 8.31656 11.9024 8.70708 12.2929L9.93278 13.5186L14.2318 8.35984Z" fill="#5FC287"></path>
-                      </svg>
-                    </span>
-                    <div className="ant-notification-notice-message">
-                      <span className="ant-notification-notice-message-single-line-auto-margin"></span>
-                      <div className="ant-notification-with-history">
-                        The draft upload process had finished.
-                        <button type="button" className="ant-btn ant-btn-link">
-                          <span>click to view</span>
-                        </button>
-                      </div>
-                    </div>
-                    <div className="ant-notification-notice-description"></div>
-                  </div>
-                </div>
-                <a tabindex="0" className="ant-notification-notice-close">
-                  <span className="ant-notification-close-x">
-                    <svg className="close-icn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711L13.4142 12L16.7071 15.2929C17.0976 15.6834 17.0976 16.3166 16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071L12 13.4142L8.70711 16.7071C8.31658 17.0976 7.68342 17.0976 7.29289 16.7071C6.90237 16.3166 6.90237 15.6834 7.29289 15.2929L10.5858 12L7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L12 10.5858L15.2929 7.29289Z" fill="#727272"></path>
-                    </svg>
-                  </span>
-                </a>
-              </div>
-              <div className="ant-notification-notice ant-notification-notice-closable success">
-                <div className="ant-notification-notice-content">
-                  <div className="ant-notification-notice-with-icon">
-                    <span className="ant-notification-notice-icon">
-                      <svg className="colored" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM14.2318 8.35984C14.5853 7.93556 15.2159 7.87824 15.6402 8.2318C16.0644 8.58537 16.1218 9.21593 15.7682 9.64021L10.7682 15.6402C10.5883 15.856 10.326 15.9863 10.0453 15.999C9.76462 16.0117 9.49154 15.9058 9.29287 15.7071L7.29287 13.7071C6.90234 13.3166 6.90234 12.6834 7.29287 12.2929C7.68339 11.9024 8.31656 11.9024 8.70708 12.2929L9.93278 13.5186L14.2318 8.35984Z" fill="#5FC287"></path>
-                      </svg>
-                    </span>
-                    <div className="ant-notification-notice-message">
-                      <span className="ant-notification-notice-message-single-line-auto-margin"></span>
-                      Settings have been saved
-                    </div>
-                    <div className="ant-notification-notice-description"></div>
-                  </div>
-                </div>
-                <a tabindex="0" className="ant-notification-notice-close">
-                  <span className="ant-notification-close-x">
-                    <svg className="close-icn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" clipRule="evenodd" d="M15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711L13.4142 12L16.7071 15.2929C17.0976 15.6834 17.0976 16.3166 16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071L12 13.4142L8.70711 16.7071C8.31658 17.0976 7.68342 17.0976 7.29289 16.7071C6.90237 16.3166 6.90237 15.6834 7.29289 15.2929L10.5858 12L7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L12 10.5858L15.2929 7.29289Z" fill="#727272"></path>
-                    </svg>
-                  </span>
-                </a>
-              </div> */}
             </span>
           </div>
         </div>
@@ -486,7 +340,22 @@ function PageLayout(props) {
         <EditVariantModal
           handleClose={() => showEditVariantModal(false)}
         />
-      }      
+      }  
+      {
+        storeListModal &&
+        <StoreListModal
+          handleClose={() => {
+            console.log("clicked")
+            showStoreListModal(false)
+          }}
+        />
+      } 
+      {
+        addStoreModal &&
+        <AddStoreModal
+          handleClose={() => showAddStoreModal(false)}
+        />
+      }    
     </>
   )
 }
@@ -510,7 +379,9 @@ const mapDispatchToProps = {
   showEditVariantModal,
   createProducts,
   setMenu,
-  addNotification
+  addNotification,
+  showStoreListModal,
+  showAddStoreModal
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageLayout)

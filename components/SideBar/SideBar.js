@@ -3,26 +3,38 @@ import SideBarMenuItem from './SideBarMenuItem'
 import PlusIcon from '@assets/PlusIcon'
 import { connect } from "react-redux"
 import { showAddProductsMenu, removeAllSelect } from "@redux/actions/menu"
-import { setMenu } from "@redux/actions/main"
+import { setMenu, getStores } from "@redux/actions/main"
 import { useEffect } from 'react';
+import { showStoreListModal } from "@redux/actions/modal"
+import StoreEditIItem from './StoreEditIItem';
 
 function SideBar(props) {
 
   const {
     setMenu,
     showAddProductsMenu,
-    removeAllSelect
+    removeAllSelect,
+    showStoreListModal,
+    getStores
   } = props
 
-  const {draftCount} = props.product
+  const { 
+    allDraftIds 
+  } = props.product
+
   const {
-    addProductsMenu    
+    addProductsMenu,       
   } = props.menu
-  const {menu} = props.main
+
+  const {
+    menu,
+    stores
+  } = props.main
 
   useEffect(() => {
     setMenu(localStorage.getItem('menu'))
-  }, [setMenu])
+    getStores()
+  }, [setMenu, getStores])
 
   const handleClickMenu = (index) => {
     removeAllSelect()
@@ -37,6 +49,10 @@ function SideBar(props) {
           <span>Auto Importer</span>
         </div>
       </div>
+      <StoreEditIItem
+        title={stores.length > 0? stores.find(item => item.status == 1).name: ''}
+        onClick={() => showStoreListModal(true)}
+      />
       <div className={styles.ggSlQC}>
         <div>
           <div className={styles.hmjpfq}>    
@@ -63,7 +79,7 @@ function SideBar(props) {
             handleMenu={() => handleClickMenu(1)}
           />
           <SideBarMenuItem
-            title={`Drafts (${draftCount})`}
+            title={`Drafts (${allDraftIds.length})`}
             icon={2}
             active={menu == 2}
             href="/drafts"
@@ -94,7 +110,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setMenu,
   showAddProductsMenu,
-  removeAllSelect
+  removeAllSelect,
+  showStoreListModal,
+  getStores
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideBar)

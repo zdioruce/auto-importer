@@ -1,7 +1,20 @@
 import excuteQuery from '../db'
 
 export default async function handler(req, res) {
+
+    const { id } = req.body
+
     try {
+        await excuteQuery({
+            query: 'UPDATE history SET status = 2 WHERE id = ?',
+            values: [id],
+        });
+        
+        await excuteQuery({
+            query: 'UPDATE history_items SET status = 2 WHERE status = 0 AND history_id = ?',
+            values: [id],
+        });
+          
         const histories = await excuteQuery({
             query: 'SELECT * FROM history WHERE hide = 0',
             values: [],
@@ -23,8 +36,12 @@ export default async function handler(req, res) {
             history.complete = completes[0].complete_count
         }
 
-        res.status(200).json({ histories })
+        res.status(200).json({ 
+            histories
+        })
     } catch ( error ) {
-        res.status(500).json({ error })
+        res.status(500).json({ 
+            error 
+        })
     }
 }  

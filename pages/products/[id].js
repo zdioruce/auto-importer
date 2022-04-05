@@ -18,7 +18,7 @@ function ProductDetail(props) {
   useEffect(() => {
     if(router.isReady){
       const { id } = router.query
-      getProduct(id)
+      getProduct(id, 1)
       setMenu(4)    
     }
   }, [router, getProduct])

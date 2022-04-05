@@ -21,7 +21,7 @@ function DraftProductDetail(props) {
   useEffect(() => {
     if(router.isReady){
       const { id } = router.query
-      getProduct(id)
+      getProduct(id, 0)
     }
   }, [router])
 

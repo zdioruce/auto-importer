@@ -1,0 +1,96 @@
+.dCsZcK {
+    display: flex;
+    position: relative;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 10px 0px;
+    border-top: 1px solid rgb(229, 229, 229);
+    min-height: 72px;
+  }
+  
+  .fHRKsE .ant-checkbox-wrapper {
+    margin-right: 20px;
+  }
+  
+  .dCsZcK .edit-store {
+    position: absolute;
+    cursor: pointer;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 24px;
+  }
+  
+  .dCsZcK .edit-store svg {
+    transition: all 0.3s ease 0s;
+  }
+  
+  .jMGhaE {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    min-width: 24px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgb(165, 212, 204);
+    margin-right: 10px;
+  }
+  
+  .dCsZcK .info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dCsZcK .info div:first-child {
+    color: rgb(90, 88, 89);
+    font-size: 15px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 32px;
+  }
+  
+  .dCsZcK .info div:first-child .store-name {
+    max-width: 190px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .dCsZcK .info .tag-icon {
+    margin-left: 4px;
+    cursor: pointer;
+  }
+  
+  .dCsZcK .info .tag-icon path {
+    transition: all 0.3s ease 0s;
+  }
+  
+  .dCsZcK .info .amount {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-family: "Inter Regular", sans-serif;
+    font-size: 11px;
+  }
+  
+  .dCsZcK .info .amount span {
+    margin-right: 5px;
+    font-size: 13px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(183, 183, 183);
+  }
+  
+  .dCsZcK .info .amount span svg {
+    margin-right: 3px;
+    width: 16px;
+    height: 16px;
+  }

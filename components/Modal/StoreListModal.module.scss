@@ -1,0 +1,44 @@
+.jAgqrz {
+    font-size: 15px;
+    position: relative;
+    color: rgb(90, 88, 89);
+    width: 380px;
+}
+
+.jAgqrz::after {
+    position: absolute;
+    content: "";
+    bottom: 55px;
+    left: 0px;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: rgb(229, 229, 229);
+}
+
+.fHRKsE {
+    max-height: 376px;
+    min-height: 376px;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.bvxVub {
+    display: flex;
+    padding: 10px 10px 10px 0px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.bvxVub .link {
+    margin-left: auto;
+}
+
+.ikFQkd {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-top: 15px;
+}

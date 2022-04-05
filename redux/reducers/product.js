@@ -4,10 +4,11 @@ const product = (state = {
   loading: false,
   error: null,
   products: [],
+  drafts: [],
   processingIds: [],
   selectedIds: [],
-  draftCount: 0,
-  productCount: 0
+  allDraftIds: [],
+  allProductIds: []
 }, action) => {
   switch(action.type){
     case t.LOADING:
@@ -25,19 +26,26 @@ const product = (state = {
         ...state,
         error: action.payload
       }
+    case t.GET_DRAFTS:
+        return {
+          ...state,
+          drafts: action.payload.products,
+          allDraftIds: action.payload.draftIds,
+          allProductIds: action.payload.productIds  
+        }      
     case t.GET_PRODUCTS:
       return {
         ...state,
         products: action.payload.products,
-        draftCount: action.payload.draftCount,
-        productCount: action.payload.productCount
+        allDraftIds: action.payload.draftIds,
+        allProductIds: action.payload.productIds
       }
     case t.GET_PRODUCT:
       return {
         ...state,
         products: action.payload.products,
-        draftCount: action.payload.draftCount,
-        productCount: action.payload.productCount
+        allDraftIds: action.payload.draftIds,
+        allProductIds: action.payload.productIds
       }      
     case t.UPDATE_PRODUCTS:      
       return {

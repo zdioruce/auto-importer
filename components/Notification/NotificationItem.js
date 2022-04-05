@@ -1,15 +1,28 @@
 import styles from './NotificationItem.module.scss'
 import { connect } from 'react-redux'
 import { showHistoryItemsModal } from "@redux/actions/modal"
-import { getHistoryItems } from "@redux/actions/history"
+import { getHistoryItems, cancelHistory, hideHistory } from "@redux/actions/history"
 import ProgressIcon from '@assets/ProgressIcon'
 import CompleteIcon from '@assets/CompleteIcon'
 import CloseIcon from '@assets/CloseIcon'
 import TrashIcon from '@assets/TrachIcon'
+import CancelIcon from '@assets/CancelIcon'
+import LoadingIcon from '@assets/LoadingIcon'
 
 function NotificationItem(props) {
 
-  const { data, showHistoryItemsModal, getHistoryItems } = props
+  const { 
+    data, 
+    showHistoryItemsModal, 
+    getHistoryItems, 
+    cancelHistory,
+    hideHistory
+  } = props
+
+  const {
+    loading
+  } = props.history
+
   let title = null
 
   if(data.action == 0) 
@@ -25,11 +38,31 @@ function NotificationItem(props) {
   if(data.status == 0) {
     status = 'in progress'
     statusIcon = <ProgressIcon/>
-  }        
-  else {
+  } else if(data.status == 1) {
     status = 'Done'
     statusIcon = <CompleteIcon/>
-  }        
+  } else if(data.status == 2) {
+    status = 'canceled'
+    statusIcon = <CancelIcon/>
+  }
+
+  let button = null
+
+  if(loading) {
+    button = <span>
+              <LoadingIcon/>
+            </span>
+  } else {
+    if(data.status == 0) {
+      button = <span onClick={() => cancelHistory(data.id)}>
+                <CloseIcon/>
+              </span>
+    } else {
+      button = <span onClick={() => hideHistory(data.id)}>
+                <TrashIcon/>
+              </span>
+    }
+  }
 
   return (
     <div className={styles.eUXZOu}>
@@ -45,9 +78,7 @@ function NotificationItem(props) {
       >
         <span>View details</span>
       </button>
-      <span>
-        {data.status == 0? <CloseIcon/>: <TrashIcon/>}
-      </span>
+      {button}
     </div>
   )
 }
@@ -58,7 +89,10 @@ const mapStateToProps = state => ({
 })
   
 const mapDispatchToProps = {
-  showHistoryItemsModal, getHistoryItems
+  showHistoryItemsModal, 
+  getHistoryItems,
+  cancelHistory,
+  hideHistory
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationItem)

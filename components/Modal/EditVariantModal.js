@@ -10,6 +10,7 @@ import Input from '@components/Input/Input'
 import { connect } from 'react-redux'
 import { setVariant } from "@redux/actions/main"
 import { saveVariant } from "@redux/actions/product"
+import { numberWithCommas } from 'util/function'
 
 function EditVariantModal(props) {
 
@@ -40,8 +41,9 @@ function EditVariantModal(props) {
   }
 
   const handleChangeQuantity = (e) => {
-    variant.quantity = Number(e.target.value)
+    variant.quantity = e.target.value
     setVariant(variant)
+    calculate(variant)
   }
 
   const handleChangeUpQuantity = () => {
@@ -49,6 +51,7 @@ function EditVariantModal(props) {
     value += 1
     variant.quantity = value
     setVariant(variant)
+    calculate(variant)
   }
 
   const handleChangeDownQuantity = () => {
@@ -60,15 +63,39 @@ function EditVariantModal(props) {
     value -= 1
     variant.quantity = value
     setVariant(variant)
+    calculate(variant)
   }
   
+  const handleChangeMinOrder = (e) => {
+    variant.minOrder = e.target.value
+    setVariant(variant)
+  }
+
+  const handleChangeUpMinOrder = () => {
+    let value = parseInt(variant.minOrder)
+    value += 1
+    variant.minOrder = value
+    setVariant(variant)
+  }
+
+  const handleChangeDownMinOrder = () => {
+    let value = parseInt(variant.minOrder)
+
+    if(value <= 0)
+      return
+      
+    value -= 1
+    variant.minOrder = value
+    setVariant(variant)
+  }
+
   const handleChangeWeight = (e) => {
-    variant.weight = Number(e.target.value)
+    variant.weight = e.target.value
     setVariant(variant)
   }
 
   const handleChangeHeight = (e) => {
-    variant.height = Number(e.target.value)
+    variant.height = e.target.value
     setVariant(variant)
   }
 
@@ -91,7 +118,7 @@ function EditVariantModal(props) {
   }
 
   const handleChangeWidth = (e) => {
-    variant.width = Number(e.target.value)
+    variant.width = e.target.value
     setVariant(variant)
   }
 
@@ -114,7 +141,7 @@ function EditVariantModal(props) {
   }
 
   const handleChangeLength = (e) => {
-    variant.length = Number(e.target.value)
+    variant.length = e.target.value
     setVariant(variant)
   }
 
@@ -144,6 +171,54 @@ function EditVariantModal(props) {
   const handleChangeUPC = (e) => {
     variant.barcode = e.target.value
     setVariant(variant)
+  }
+
+  const handleChangeBuyBoxPrice = (e) => {
+    variant.buyBoxPrice = e.target.value
+    setVariant(variant)
+    calculate(variant)
+  }
+
+  const handleChangeUpBuyBoxPrice = () => {
+    let value = parseFloat(variant.buyBoxPrice)
+    value += 0.01
+    variant.buyBoxPrice = value.toFixed(2)
+    setVariant(variant)
+    calculate(variant)
+  }
+
+  const handleChangeDownBuyBoxPrice = () => {
+    let value = parseFloat(variant.buyBoxPrice)
+    value -= 0.01
+    variant.buyBoxPrice = value.toFixed(2)
+    setVariant(variant)
+    calculate(variant)
+  }
+
+  const handleChangeFee = (e) => {
+    variant.fee = e.target.value
+    setVariant(variant)
+    calculate(variant)
+  }
+
+  const handleChangeUpFee = () => {
+    let value = parseFloat(variant.fee)
+    value += 0.01
+    variant.fee = value.toFixed(2)
+    setVariant(variant)
+    calculate(variant)
+  }
+
+  const handleChangeDownFee = () => {
+    let value = parseFloat(variant.fee)
+
+    if(value <= 0)
+      return
+
+    value -= 0.01
+    variant.fee = value.toFixed(2)
+    setVariant(variant)
+    calculate(variant)
   }
 
   const handleChangeProfit = (e) => {
@@ -189,7 +264,7 @@ function EditVariantModal(props) {
     setVariant(variant)
     calculate(variant)
   }
-
+  
   const handleChangePrice = (e) => {
     variant.price = Number(e.target.value)
     setVariant(variant)
@@ -211,33 +286,7 @@ function EditVariantModal(props) {
     setVariant(variant)
     calculateProfit(variant)
   }
-
-  const handleChangeFee = (e) => {
-    variant.fee = Number(e.target.value)
-    setVariant(variant)
-    calculate(variant)
-  }
-
-  const handleChangeUpFee = () => {
-    let value = parseFloat(variant.fee)
-    value += 0.01
-    variant.fee = value.toFixed(2)
-    setVariant(variant)
-    calculate(variant)
-  }
-
-  const handleChangeDownFee = () => {
-    let value = parseFloat(variant.fee)
-
-    if(value <= 0)
-      return
-
-    value -= 0.01
-    variant.fee = value.toFixed(2)
-    setVariant(variant)
-    calculate(variant)
-  }
-
+  
   function calculate(variant) {
     let buyBoxPrice = variant.buyBoxPrice
     let fee = variant.fee
@@ -248,19 +297,10 @@ function EditVariantModal(props) {
 
     variant.totalProfit = totalProfit.toFixed(2)
     variant.price = price.toFixed(2)
-    setVariant(variant)
-  }
-
-  function calculateProfit(variant) {
-    let buyBoxPrice = variant.buyBoxPrice
-    let price = variant.price
-    let totalProfit = price - buyBoxPrice
-    let profit = (totalProfit - variant.profitAmount) * 100 / price
-
     variant.profit = profit.toFixed(2)
-    variant.totalProfit = totalProfit.toFixed(2)
     setVariant(variant)
   }
+
 
   let tabX = 0
   let tabWidth = 0
@@ -304,13 +344,21 @@ function EditVariantModal(props) {
                 </div>
                 <div className={styles.description}>
                   <p className="ellipsis">{variant.title}</p>
+                  {/* <div style={{whiteSpace: 'nowrap'}} className={styles.small}>
+                    <i style={{color:'#f1bb00'}} className={variant.rating > 0 && variant.rating < 0.5?"fa fa-star-half-o":"fa fa-star"}></i>
+                    <i style={{color:'#f1bb00'}} className={variant.rating > 1 && variant.rating < 1.5?"fa fa-star-half-o":"fa fa-star"}></i>
+                    <i style={{color:'#f1bb00'}} className={variant.rating > 2 && variant.rating < 2.5?"fa fa-star-half-o":"fa fa-star"}></i>
+                    <i style={{color:'#f1bb00'}} className={variant.rating > 3 && variant.rating < 3.5?"fa fa-star-half-o":"fa fa-star"}></i>
+                    <i style={{color:'#f1bb00'}} className={variant.rating > 4 && variant.rating < 4.5?"fa fa-star-half-o":"fa fa-star"}></i> 
+                    {numberWithCommas(variant.reviewCount)} Reviews
+                  </div> */}
                   <div className={styles.info}>
                     {
                       variant.option1_name.length > 0 && 
                       <span>{variant.option1_name + ': ' + variant.option1_value}</span>
                     }
                     {
-                      variant.option2_name.length > 0 && 
+                      variant.option2_name && 
                       <span>{variant.option2_name + ': ' + variant.option2_value}</span>
                     }                    
                     <span>Buy ID: {variant.sku}</span>
@@ -318,8 +366,8 @@ function EditVariantModal(props) {
                   </div>
                 </div>
                 <div className={styles['total-profit']}>
-                  <p>Total Profit</p>
-                  <span>${variant.totalProfit}</span>
+                  <p>Deal Profit</p>
+                  <span>${numberWithCommas(variant.totalProfit)}</span>
                 </div>
               </div>
               <div className="ant-tabs ant-tabs-top ant-tabs-line">
@@ -361,10 +409,12 @@ function EditVariantModal(props) {
                         <div className={styles['form-wrapper']}>
                           <div className={styles['input-wrapper']}>
                             <label>
-                              Buy Price
-                              <InputNumber
-                                disabled={true}
+                              Amazon Buy Box $
+                              <InputNumber                                
                                 value={variant.buyBoxPrice}
+                                handleUp={handleChangeUpBuyBoxPrice}
+                                handleDown={handleChangeDownBuyBoxPrice}
+                                handleChange={handleChangeBuyBoxPrice}
                               />
                             </label>
                           </div>
@@ -400,6 +450,8 @@ function EditVariantModal(props) {
                             />
                           </label>
                           </div>
+                        </div>   
+                        <div className={styles['form-wrapper']}>
                           <div className={styles['input-wrapper']}>
                             <label>
                               Sell Price
@@ -411,7 +463,7 @@ function EditVariantModal(props) {
                               />
                             </label>
                           </div>
-                        </div>                    
+                        </div>                 
                         {/* <div className="modal-form mb-10">
                           <div className="ant-row" style={{marginLeft: -12, marginRight: -12}}>
                             <div className="ant-col ant-col-12" style={{paddingLeft: 12, paddingRight: 12}}>
@@ -484,13 +536,25 @@ function EditVariantModal(props) {
                           }                          
                           <div className="ant-col ant-col-12" style={{paddingLeft: 12, paddingRight: 12}}>
                             <label>
-                              Default Qty
+                              Total Available Qty
                               <InputNumber
                                 placeholder="Enter Default Qty"
                                 value={variant.quantity}
                                 handleUp={handleChangeUpQuantity}
                                 handleDown={handleChangeDownQuantity}
                                 handleChange={handleChangeQuantity}
+                              />
+                            </label>
+                          </div>
+                          <div className="ant-col ant-col-12" style={{paddingLeft: 12, paddingRight: 12}}>
+                            <label>
+                              Minimum Order
+                              <InputNumber
+                                placeholder="Enter Minimum Order"
+                                value={variant.minOrder}
+                                handleUp={handleChangeUpMinOrder}
+                                handleDown={handleChangeDownMinOrder}
+                                handleChange={handleChangeMinOrder}
                               />
                             </label>
                           </div>

@@ -2,7 +2,7 @@ import * as t from "../types";
 import axios from "axios";
 import { request } from "../../util/request";
 
-export const deleteProducts = (ids, option) => async dispatch => {
+export const deleteProducts = (ids, option, status) => async dispatch => {
   try {
     dispatch({
       type: t.SELECT_PRODUCTS,
@@ -18,16 +18,31 @@ export const deleteProducts = (ids, option) => async dispatch => {
       `/api/product/delete`, 
       {ids, option}
     );
-    localStorage.setItem('products', JSON.stringify(apiResponse.data.products))
 
-    dispatch({
-      type: t.GET_PRODUCTS,
-      payload: {
-        products: apiResponse.data.products,
-        draftCount: apiResponse.data.draftCount,
-        productCount: apiResponse.data.productCount,
-      }
-    })
+    if(status == 1) {
+      localStorage.setItem('products', JSON.stringify(apiResponse.data.products))
+
+      dispatch({
+        type: t.GET_PRODUCTS,
+        payload: {
+          products: apiResponse.data.products,
+          draftIds: apiResponse.data.draftIds,
+          productIds: apiResponse.data.productIds,
+        }
+      })  
+    } else {
+      localStorage.setItem('drafts', JSON.stringify(apiResponse.data.products))
+
+      dispatch({
+        type: t.GET_DRAFTS,
+        payload: {
+          products: apiResponse.data.products,
+          draftIds: apiResponse.data.draftIds,
+          productIds: apiResponse.data.productIds,
+        }
+      })  
+    }
+
     dispatch({
       type: t.PROCESSING,
       payload: []
@@ -61,11 +76,11 @@ export const importProducts = (ids) => async dispatch => {
     localStorage.setItem('products', JSON.stringify(apiResponse.data.products))
 
     dispatch({
-      type: t.GET_PRODUCTS,
+      type: t.GET_DRAFTS,
       payload: {
         products: apiResponse.data.products,
-        draftCount: apiResponse.data.draftCount,
-        productCount: apiResponse.data.productCount,
+        draftIds: apiResponse.data.draftIds,
+        productIds: apiResponse.data.productIds,
       }
     })
 
@@ -136,16 +151,31 @@ export const getProducts = (page, show, status) => async dispatch => {
       { page, show, status }
     )
 
-    localStorage.setItem('products', JSON.stringify(apiResponse.data.products))
+    if(status == 1) {
+      localStorage.setItem('products', JSON.stringify(apiResponse.data.products))
 
-    dispatch({
-      type: t.GET_PRODUCTS,
-      payload: {
-        products: apiResponse.data.products,
-        draftCount: apiResponse.data.draftCount,
-        productCount: apiResponse.data.productCount,
-      }
-    })
+      dispatch({
+        type: t.GET_PRODUCTS,
+        payload: {
+          products: apiResponse.data.products,
+          draftIds: apiResponse.data.draftIds,
+          productIds: apiResponse.data.productIds,
+        }
+      })
+  
+    } else {
+      localStorage.setItem('drafts', JSON.stringify(apiResponse.data.products))
+
+      dispatch({
+        type: t.GET_DRAFTS,
+        payload: {
+          products: apiResponse.data.products,
+          draftIds: apiResponse.data.draftIds,
+          productIds: apiResponse.data.productIds,
+        }
+      })  
+    }
+
     dispatch({
       type: t.LOADING,
       payload: false
@@ -163,7 +193,7 @@ export const getProducts = (page, show, status) => async dispatch => {
   }
 }
 
-export const getProduct = (id) => async dispatch => {
+export const getProduct = (id, status) => async dispatch => {
   try {
     dispatch({
       type: t.LOADING,
@@ -174,14 +204,26 @@ export const getProduct = (id) => async dispatch => {
       '/api/product/' + id
     )
 
-    dispatch({
-      type: t.GET_PRODUCT,
-      payload: {
-        products: apiResponse.data.products,
-        draftCount: apiResponse.data.draftCount,
-        productCount: apiResponse.data.productCount,
-      }
-    })
+    if(status == 1) {
+      dispatch({
+        type: t.GET_PRODUCT,
+        payload: {
+          products: apiResponse.data.products,
+          draftIds: apiResponse.data.draftIds,
+          productIds: apiResponse.data.productIds,
+        }
+      })  
+    } else {
+      dispatch({
+        type: t.GET_DRAFTS,
+        payload: {
+          products: apiResponse.data.products,
+          draftIds: apiResponse.data.draftIds,
+          productIds: apiResponse.data.productIds,
+        }
+      })  
+    }
+
     dispatch({
       type: t.LOADING,
       payload: false
@@ -217,16 +259,31 @@ export const createProducts = (uploadVariations, ids, action) => async dispatch 
       timeout: 300000
     })
 
-    localStorage.setItem('products', JSON.stringify(apiResponse.data.products))
+    if(action == 1) {
+      localStorage.setItem('products', JSON.stringify(apiResponse.data.products))
 
-    dispatch({
-      type: t.GET_PRODUCTS,
-      payload: {
-        products: apiResponse.data.products,
-        draftCount: apiResponse.data.draftCount,
-        productCount: apiResponse.data.productCount,
-      }
-    })
+      dispatch({
+        type: t.GET_PRODUCTS,
+        payload: {
+          products: apiResponse.data.products,
+          draftIds: apiResponse.data.draftIds,
+          productIds: apiResponse.data.productIds,
+        }
+      })
+  
+    } else {
+      localStorage.setItem('drafts', JSON.stringify(apiResponse.data.products))
+
+      dispatch({
+        type: t.GET_DRAFTS,
+        payload: {
+          products: apiResponse.data.products,
+          draftIds: apiResponse.data.draftIds,
+          productIds: apiResponse.data.productIds,
+        }
+      })  
+    }
+    
     dispatch({
       type: t.LOADING,
       payload: false
@@ -244,7 +301,7 @@ export const createProducts = (uploadVariations, ids, action) => async dispatch 
   }
 }
 
-export const updateProducts = (data) => async dispatch => {
+export const updateProducts = (data, status) => async dispatch => {
   
   let products = JSON.parse(localStorage.getItem('products'))
 

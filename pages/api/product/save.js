@@ -1,17 +1,28 @@
 import excuteQuery from '../db'
+import { getMetaFields } from '../util';
 const Shopify = require('shopify-api-node');
-const shopify = new Shopify({
-    shopName: process.env.SHOP,
-    accessToken: process.env.SHOPIFY_ACCESS_TOKEN
-});
+// const shopify = new Shopify({
+//     shopName: process.env.SHOP,
+//     accessToken: process.env.SHOPIFY_ACCESS_TOKEN
+// });
 
 export default async function handler(req, res) {
 
     const { data } = req.body
 
+    const stores = await excuteQuery({
+        query: 'SELECT * FROM stores WHERE status = 1',
+        values: [],
+    });
+
+    const shopify = new Shopify({
+        shopName: stores[0].url,
+        accessToken: stores[0].token
+    });
+
     try {
         await excuteQuery({
-            query: "UPDATE products SET title=?, brand=?, collections=?, tags=?, shipping_method=?, country=?, city=? WHERE id = ?",
+            query: "UPDATE products SET title=?,brand=?,collections=?,tags=?,shipping_method=?,country=?,city=?,buyBoxPrice=?,unitCost=?,fee=?,netProfitPerUnit=?,netProfitPerUnitPercent=?,netProceeds=?,dealProfit=?,quantity=?,minOrder=? WHERE id = ?",
             values: [
                 data.title, 
                 data.brand,
@@ -19,7 +30,16 @@ export default async function handler(req, res) {
                 data.tags, 
                 data.shipping_method,
                 data.country,
-                data.city,
+                data.city,                
+                data.buyBoxPrice,
+                data.unitCost,
+                data.fee,
+                data.netProfitPerUnit,
+                data.netProfitPerUnitPercent,
+                data.netProceeds,
+                data.dealProfit,
+                data.quantity,
+                data.minOrder,
                 data.id
             ],
         });
@@ -34,6 +54,14 @@ export default async function handler(req, res) {
                     "tags": data.tags.split(),
                 }
             )    
+
+            console.log("product import end")
+            await shopify.metafield.update(
+                data.metafield_id,
+                {
+                    value: JSON.stringify(getMetaFields(data))
+                }
+            )
 
             // const collections = data.collections.split(',')
             // console.log('collections =', collections)

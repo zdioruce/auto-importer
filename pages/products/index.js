@@ -29,12 +29,12 @@ function Products(props) {
   } = props
   
   const { 
-    productCount, 
     products, 
     loading, 
     error, 
     processingIds, 
-    selectedIds 
+    selectedIds,
+    allProductIds 
   } = props.product
   
   const { 
@@ -45,7 +45,7 @@ function Products(props) {
     histories 
   } = props.history
   
-  const [show, setShow] = useState(10)
+  const [show, setShow] = useState(20)
   const [page, setPage] = useState(0)
   const [productID, setProductID] = useState(null)
 
@@ -58,7 +58,7 @@ function Products(props) {
     showProductDeleteModal(false)
     
     let ids = selectedIds.length > 0? selectedIds: [productID]
-    deleteProducts(ids, option)
+    deleteProducts(ids, option, 1)
     addNotification({
       id: notifications.length,
       message: ids.length + ' products were sent to be deleted'
@@ -92,6 +92,18 @@ function Products(props) {
     }
   }
 
+  const handleClickSelectAll = () => {
+    let ids = []
+    allProductIds.map(element => {
+      ids.push(element.id)
+    })  
+    selectProducts(ids)
+  }
+
+  const handleClickCancelAll = () => {
+    selectProducts([])
+  }
+
   let content = null
   
   if (error) {
@@ -105,43 +117,44 @@ function Products(props) {
   } else if(products.length == 0) {
     content = <NoProducts/>
   } else {
-    content = <>
-                <div className={styles.bJBQtm + ' with-custom-heading'}>
-                  <table>
-                    <ProductTableHead/>
-                    <tbody>
-                      {
-                        products && products.map((element, index) => (
-                          <ProductTableRow 
-                            key={index} 
-                            check={selectedIds.includes(element.id)}
-                            loading={processingIds.includes(element.id)}
-                            item={element}
-                            handleCheck={handleCheck}
-                            handleDelete={() => {              
-                              showProductDeleteModal(true)
-                              setProductID(element.id)
-                            }}
-                          />
-                        ))
-                      }
-                    </tbody>
-                  </table>
-                </div>
-                {/* <Pagination
-                  show={show}
-                  total={productCount}
-                  page={page}
-                  handlePage={(value) => {
-                    setPage(value)
-                    getProducts(value, show, 1)
+    content = 
+    <>
+      <div className={styles.bJBQtm + ' with-custom-heading'}>
+        <table>
+          <ProductTableHead/>
+          <tbody>
+            {
+              products && products.map((element, index) => (
+                <ProductTableRow 
+                  key={index} 
+                  check={selectedIds.includes(element.id)}
+                  loading={processingIds.includes(element.id)}
+                  item={element}
+                  handleCheck={handleCheck}
+                  handleDelete={() => {              
+                    showProductDeleteModal(true)
+                    setProductID(element.id)
                   }}
-                  handleShow={(value) => {
-                    setShow(value)
-                    getProducts(page, value, 1)
-                  }}
-                /> */}
-              </>
+                />
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <Pagination
+        show={show}
+        total={allProductIds.length}
+        page={page}
+        handlePage={(value) => {
+          setPage(value)
+          getProducts(value, show, 1)
+        }}
+        handleShow={(value) => {
+          setShow(value)
+          getProducts(page, value, 1)
+        }}
+      />
+    </>
   }
 
   return (
@@ -164,7 +177,7 @@ function Products(props) {
           <div className={styles.hFzCJJ}>
             <CheckBox
               check={selectedIds.length > 0}
-              indeterminate={selectedIds.length != products.length}         
+              indeterminate={selectedIds.length != allProductIds.length}         
               handleCheck={handleAllCheck}
             />
             <p className={selectedIds.length > 0? styles.checked: ''}>
@@ -181,6 +194,26 @@ function Products(props) {
             <span onClick={() => showHistoryModal(true)}>View History</span>
           </div>
         </div>
+        {
+          selectedIds.length > 0 &&
+          <div className={styles.klIimJ}>
+            {
+              selectedIds.length < allProductIds.length &&
+              <>
+                All {selectedIds.length} products on this page are selected.
+                <button type="button" className="ant-btn default ant-btn-link" onClick={handleClickSelectAll}>
+                  <span>Select all {allProductIds.length} products</span>
+                </button>
+              </>
+            }
+            {
+              selectedIds.length == allProductIds.length &&
+              <button type="button" className="ant-btn ant-btn-link" onClick={handleClickCancelAll}>
+                <span>Cancel all {selectedIds.length} selected products</span>
+              </button>
+            }
+          </div>
+        }
       </div>      
       {content}
       {

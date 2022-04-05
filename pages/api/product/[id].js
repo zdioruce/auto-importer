@@ -19,20 +19,20 @@ export default async function handler(req, res) {
             product['variants'] = variants
         }
 
-        const draftCount = await excuteQuery({
-            query: 'SELECT COUNT(id) AS numberOfProducts FROM products WHERE status = 0',
+        const draftIds = await excuteQuery({
+            query: 'SELECT id FROM products WHERE status = 0',
             values: [],
         });
-
-        const productCount = await excuteQuery({
-            query: 'SELECT COUNT(id) AS numberOfProducts FROM products WHERE status = 1',
+    
+        const productIds = await excuteQuery({
+            query: 'SELECT id FROM products WHERE status = 1',
             values: [],
         });
 
         res.status(200).json({ 
             products,
-            draftCount: draftCount[0].numberOfProducts,
-            productCount: productCount[0].numberOfProducts
+            draftIds,
+            productIds
         })
     } catch ( error ) {
         res.status(500).json({ 

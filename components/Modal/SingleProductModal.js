@@ -13,9 +13,9 @@ function SingleProductModal(props) {
 
   const handleChange = (event) => {
     if(event.target.value.length == 0)
-        setProductIDs([])
+      setProductIDs([])
     else
-        setProductIDs([event.target.value])
+      setProductIDs([{ASIN:event.target.value,'Unit Cost':0,'Selling Fee':15,'Minimum Order':100,'Total Available Qty':1000}])
   }
 
   return (
@@ -35,7 +35,7 @@ function SingleProductModal(props) {
             placeholder="Enter URL or Product ID" 
             type="text" 
             className='ant-input ant-input-lg' 
-            value={productIDs.length > 0? productIDs[0]: ''} 
+            value={productIDs.length > 0? productIDs[0].ASIN: ''} 
             onChange={handleChange} 
           />
           <div className='m-t-20'>

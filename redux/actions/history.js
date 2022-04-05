@@ -70,3 +70,69 @@ export const getHistoryItems = (id) => async dispatch => {
     })
   }
 }
+
+export const cancelHistory = (id) => async dispatch => {
+  try {
+    dispatch({
+      type: t.LOADING,
+      payload: true
+    })
+
+    const apiResponse = await axios.post(
+      '/api/history/cancel',
+      {id}
+    )
+    
+    dispatch({
+      type: t.GET_HISOTRY,
+      payload: apiResponse.data.histories,
+    })
+    dispatch({
+      type: t.LOADING,
+      payload: false
+    })
+
+  }catch(error){
+    dispatch({
+      type: t.LOADING,
+      payload: false
+    })
+    dispatch({
+      type: t.ERROR,
+      payload: error.response.data.error
+    })
+  }
+}
+
+export const hideHistory = (id) => async dispatch => {
+  try {
+    dispatch({
+      type: t.LOADING,
+      payload: true
+    })
+
+    const apiResponse = await axios.post(
+      '/api/history/hide',
+      {id}
+    )
+    
+    dispatch({
+      type: t.GET_HISOTRY,
+      payload: apiResponse.data.histories,
+    })
+    dispatch({
+      type: t.LOADING,
+      payload: false
+    })
+
+  }catch(error){
+    dispatch({
+      type: t.LOADING,
+      payload: false
+    })
+    dispatch({
+      type: t.ERROR,
+      payload: error.response.data.error
+    })
+  }
+}

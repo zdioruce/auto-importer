@@ -5,6 +5,7 @@ import CheckBox from '@components/Input/CheckBox'
 import { connect } from 'react-redux'
 import { setVariant } from "@redux/actions/main"
 import { showEditVariantModal } from "@redux/actions/modal"
+import { numberWithCommas } from 'util/function'
 
 const VariantTableRow = (props) => {
 
@@ -24,6 +25,11 @@ const VariantTableRow = (props) => {
   else if(data.availabilityAmazon == 3)
     stock = <div className={styles.cwEXfY}>In Hold</div>  
 
+  let option = data.option1_name + ': ' + data.option1_value
+  if(data.option2_name) {
+    option += ', ' + data.option2_name + ': ' + data.option2_value
+  }
+
   return (
     <div className={styles.jypVEH}>
       <div className={`${styles['ant-row-flex']} ant-row-flex ant-row-flex-middle`}>
@@ -41,7 +47,15 @@ const VariantTableRow = (props) => {
             height={60}
           />
           <div className={styles.eIbWUB}>
-            <div>{data.option1_name}: {data.option1_value}</div>
+            <div>{option}</div>
+            {/* <div style={{whiteSpace: 'nowrap'}} className={styles.small}>
+              <i style={{color:'#f1bb00'}} className={data.rating > 0 && data.rating < 0.5?"fa fa-star-half-o":"fa fa-star"}></i>
+              <i style={{color:'#f1bb00'}} className={data.rating > 1 && data.rating < 1.5?"fa fa-star-half-o":"fa fa-star"}></i>
+              <i style={{color:'#f1bb00'}} className={data.rating > 2 && data.rating < 2.5?"fa fa-star-half-o":"fa fa-star"}></i>
+              <i style={{color:'#f1bb00'}} className={data.rating > 3 && data.rating < 3.5?"fa fa-star-half-o":"fa fa-star"}></i>
+              <i style={{color:'#f1bb00'}} className={data.rating > 4 && data.rating < 4.5?"fa fa-star-half-o":"fa fa-star"}></i> 
+              <span style={{color:'#cea000'}}>{data.rating}</span> ({numberWithCommas(data.reviewCount)} reviews)
+            </div> */}
             <div>
               <span>
                 {stock}                

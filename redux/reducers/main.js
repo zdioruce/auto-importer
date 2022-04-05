@@ -7,7 +7,8 @@ const main = (state = {
     setting: null,
     menu: 0,
     variant: null,
-    notifications: []
+    notifications: [],
+    stores: [],
 }, action) => {
   switch(action.type){
     case t.LOADING:
@@ -62,6 +63,11 @@ const main = (state = {
         ...state,
         notifications: array
       };      
+    case t.GET_STORES:
+      return {
+        ...state,
+        stores: action.payload,
+      }
     default:
       return {...state};
   }

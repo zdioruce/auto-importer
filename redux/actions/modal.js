@@ -48,3 +48,16 @@ export const showEditVariantModal = (show) => dispatch => dispatch({
   type: t.SHOW_EDIT_VARIANT_MODAL,
   payload: show
 });
+
+export const showStoreListModal = (show) => dispatch => {
+  
+  dispatch({
+    type: t.SHOW_STORE_LIST_MODAL,
+    payload: show
+  });
+}
+
+export const showAddStoreModal = (show) => dispatch => dispatch({
+  type: t.SHOW_ADD_STORE_MODAL,
+  payload: show
+});

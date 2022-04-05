@@ -58,7 +58,18 @@ const modal = (state = {
       return { 
         ...state,
         editVariantModal: action.payload
-      };                        
+      };  
+    case t.SHOW_STORE_LIST_MODAL:   
+      console.log(action.payload)
+      return { 
+        ...state,
+        storeListModal: action.payload
+      }; 
+    case t.SHOW_ADD_STORE_MODAL:   
+      return { 
+        ...state,
+        addStoreModal: action.payload
+      };                               
     default:
       return {...state};
   }

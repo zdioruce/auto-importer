@@ -22,7 +22,7 @@ export default function ProductTableRow({item, check, loading, handleCheck, hand
             rel="noreferrer" 
             href={`/products/${item.id}`}
           >
-            <Image 
+            <img 
               className={styles.img} 
               src={process.env.IMAGE_PATH + item.images.split(',')[0]} 
               alt="prod-img"

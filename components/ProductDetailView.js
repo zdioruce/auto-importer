@@ -6,6 +6,7 @@ import ProductVariantsTab from '@components/Tab/ProductVariantsTab'
 import ProductImagesTab from '@components/Tab/ProductImagesTab'
 import React, { useState, useRef } from "react"
 import ProductDescriptionTab from './Tab/ProductDescriptionTab'
+import ProductPricingTab from './Tab/ProductPricingTab'
 
 export default function ProductDetailView(props) {
 
@@ -15,23 +16,44 @@ export default function ProductDetailView(props) {
   const refTab2 = useRef(null);
   const refTab3 = useRef(null);
   const refTab4 = useRef(null);
+  const refTab5 = useRef(null);
 
+  const handleTab = (tab) => {
+    setTab(tab)
+  }
+  
   let tabX = 0
   let tabWidth = 0
 
-  if(tab == 0) {
-    tabX = 0
-    tabWidth = refTab1.current? refTab1.current.offsetWidth: 90
-  } else if(tab == 1){
-    tabX = refTab1.current.offsetWidth
-    tabWidth = refTab2.current.offsetWidth
-  } else if(tab == 2){
-    tabX = refTab2.current.offsetWidth + refTab1.current.offsetWidth
-    tabWidth = refTab3.current.offsetWidth
-  } else if(tab == 3){
-    tabX = refTab1.current.offsetWidth + refTab2.current.offsetWidth + refTab3.current.offsetWidth
-    tabWidth = refTab4.current.offsetWidth
-  } 
+  if(data.variants.length > 0) {
+    if(tab == 0) {
+      tabX = 0
+      tabWidth = refTab1.current? refTab1.current.offsetWidth: 90
+    } else if(tab == 1){
+      tabX = refTab1.current.offsetWidth
+      tabWidth = refTab2.current.offsetWidth
+    } else if(tab == 2){
+      tabX = refTab2.current.offsetWidth + refTab1.current.offsetWidth
+      tabWidth = refTab3.current.offsetWidth
+    } else if(tab == 3){
+      tabX = refTab1.current.offsetWidth + refTab2.current.offsetWidth + refTab3.current.offsetWidth
+      tabWidth = refTab4.current.offsetWidth
+    }     
+  } else {
+    if(tab == 0) {
+      tabX = 0
+      tabWidth = refTab1.current? refTab1.current.offsetWidth: 90
+    } else if(tab == 1){
+      tabX = refTab1.current.offsetWidth
+      tabWidth = refTab2.current.offsetWidth
+    } else if(tab == 3){
+      tabX = refTab1.current.offsetWidth + refTab2.current.offsetWidth
+      tabWidth = refTab4.current.offsetWidth
+    } else {
+      tabX = refTab1.current.offsetWidth + refTab2.current.offsetWidth + refTab4.current.offsetWidth
+      tabWidth = refTab5.current.offsetWidth
+    }
+  }
 
   return (
     <div className={expand? (fullpage? styles.iLolDK: styles.dIqhFR): styles.hAAzhb}>
@@ -42,40 +64,55 @@ export default function ProductDetailView(props) {
           <div className="ant-tabs-nav-container">
             <div className="ant-tabs-nav-wrap">
               <div className="ant-tabs-nav-scroll">
-                <div className="ant-tabs-nav ant-tabs-nav-animated">
-                  <div>                      
-                    <Tab
-                      refTab={refTab1}
-                      title={'Product'}
-                      tab={0}
-                      currentTab={tab}
-                      onClick={() => setTab(0)}
-                    />
-                    <Tab
-                      refTab={refTab2}
-                      title={'Description'}
-                      tab={1}
-                      currentTab={tab}
-                      onClick={() => setTab(1)}
-                    />
-                    <Tab
-                      refTab={refTab3}
-                      title={data.variants.length == 0? 'Variants': `Variants (${data.variants.length})`}
-                      tab={2}
-                      currentTab={tab}
-                      onClick={() => setTab(2)}
-                    />
-                    <Tab
-                      refTab={refTab4}
-                      title={'Images'}
-                      tab={3}
-                      currentTab={tab}
-                      onClick={() => setTab(3)}
-                    />                      
+                  <div className="ant-tabs-nav ant-tabs-nav-animated">
+                    <div>                      
+                      <Tab
+                        refTab={refTab1}
+                        title={'Product'}
+                        tab={0}
+                        currentTab={tab}
+                        onClick={() => handleTab(0)}
+                      />
+                      <Tab
+                        refTab={refTab2}
+                        title={'Description'}
+                        tab={1}
+                        currentTab={tab}
+                        onClick={() => handleTab(1)}
+                      />
+                      {
+                        data.variants.length > 0 &&
+                        <Tab
+                          refTab={refTab3}
+                          title={`Variants (${data.variants.length})`}
+                          tab={2}
+                          currentTab={tab}
+                          onClick={() => handleTab(2)}
+                        />
+                      }
+                      <Tab
+                        refTab={refTab4}
+                        title={'Images'}
+                        tab={3}
+                        currentTab={tab}
+                        onClick={() => handleTab(3)}
+                      />
+                      {
+                        data.variants.length == 0 &&
+                        <Tab
+                          refTab={refTab5}
+                          title={'Pricing'}
+                          tab={4}
+                          currentTab={tab}
+                          onClick={() => handleTab(4)}
+                        />
+                      }
+                    </div>
+                    <div className="ant-tabs-ink-bar ant-tabs-ink-bar-no-animated" style={{display: 'block', transform: 'translate3d(' + tabX + 'px, 0px, 0px)', width: tabWidth}}>
+                    </div>
                   </div>
                   <div className="ant-tabs-ink-bar ant-tabs-ink-bar-no-animated" style={{display: 'block', transform: 'translate3d(' + tabX + 'px, 0px, 0px)', width: tabWidth}}>
-                  </div>
-                </div>
+                  </div>                
               </div>
             </div>
           </div>
@@ -102,17 +139,20 @@ export default function ProductDetailView(props) {
               />
             }
           </TabPanel>
-          <TabPanel            
-            currentTab={tab} 
-            tab={2}>
-            {
-              tab == 2 &&
-              <ProductVariantsTab
-                fullpage={fullpage}
-                variants={data.variants}
-              />              
-            }
-          </TabPanel>
+          {
+            data.variants.length > 0 && 
+            <TabPanel            
+              currentTab={tab} 
+              tab={2}>
+              {
+                tab == 2 &&
+                <ProductVariantsTab
+                  fullpage={fullpage}
+                  variants={data.variants}
+                />              
+              }
+            </TabPanel>
+          }
           <TabPanel
             currentTab={tab} 
             tab={3}>
@@ -124,6 +164,20 @@ export default function ProductDetailView(props) {
               />
             }
           </TabPanel>
+          {
+            data.variants.length == 0 && 
+            <TabPanel
+              currentTab={tab} 
+              tab={4}          
+            >
+              {
+                tab == 4 &&
+                <ProductPricingTab
+                  data={data}
+                />
+              }
+            </TabPanel>
+          }
         </div>
       </div>
     </div>  

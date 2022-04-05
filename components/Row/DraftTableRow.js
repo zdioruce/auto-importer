@@ -13,7 +13,7 @@ export default function DraftTableRow(props) {
 
   const {data, loading, check, handleCheck, handleImport, handleDelete, handleSave} = props
   const [expand, setExpand] = useState(false)
-
+  
   function handleExpand(){
     setExpand(!expand)
   }
@@ -32,7 +32,7 @@ export default function DraftTableRow(props) {
           <i aria-label="icon: right" className={`${styles['anticon-right']} anticon anticon-right`}>
             <RightArrowIcon/>
           </i>
-          <Image 
+          <img 
             className={styles.img} 
             src={process.env.IMAGE_PATH + data.images.split(',')[0]} 
             alt="product-pic" 

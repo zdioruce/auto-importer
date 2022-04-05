@@ -33,12 +33,12 @@ function Drafts(props) {
   } = props
 
   const {
-    products, 
+    drafts, 
     loading, 
     error, 
     processingIds, 
     selectedIds,
-    draftCount
+    allDraftIds
   } = props.product
   
   const {
@@ -55,7 +55,7 @@ function Drafts(props) {
   } = props.main
 
   const [productID, setProductID] = useState(null)
-  const [show, setShow] = useState(10)
+  const [show, setShow] = useState(20)
   const [page, setPage] = useState(0)
 
   useEffect(() => {
@@ -79,7 +79,7 @@ function Drafts(props) {
   }
 
   function handleSave(id) {
-    const found = products.find(element => element.id == id);
+    const found = allDraftIds.find(element => element.id == id);
     saveProduct(found)
   }
 
@@ -87,7 +87,7 @@ function Drafts(props) {
     showDraftDeleteModal(false)    
 
     let ids = selectedIds.length > 0? selectedIds: [productID]
-    deleteProducts(ids, 0)
+    deleteProducts(ids, 0, 0)
     addNotification({
       id: notifications.length,
       message: ids.length + ' products were sent to be deleted'
@@ -123,11 +123,23 @@ function Drafts(props) {
       selectProducts([])
     } else{
       let ids = []
-      products.map(element => {
+      drafts.map(element => {
         ids.push(element.id)
       })  
       selectProducts(ids)
     }
+  }
+
+  const handleClickSelectAll = () => {
+    let ids = []
+    allDraftIds.map(element => {
+      ids.push(element.id)
+    })  
+    selectProducts(ids)
+  }
+
+  const handleClickCancelAll = () => {
+    selectProducts([])
   }
 
   let content = null
@@ -140,13 +152,13 @@ function Drafts(props) {
     content = <div className={styles['spin-wrapper']}>
                 <Spin/>
               </div>
-  } else if(products.length == 0) {
+  } else if(drafts.length == 0) {
     content = <NoProducts/>
-  } else {
+  } else {    
     content = 
     <>
       {
-        products && products.map((element, index) => (
+        drafts && drafts.map((element, index) => (
           <DraftTableRow
             key={index}
             loading={processingIds.includes(element.id)}
@@ -162,9 +174,9 @@ function Drafts(props) {
           />
         ))
       }
-      {/* <Pagination
+      <Pagination
         show={show}
-        total={draftCount}
+        total={allDraftIds.length}
         page={page}
         handlePage={(value) => {
           setPage(value)
@@ -174,7 +186,7 @@ function Drafts(props) {
           setShow(value)
           getProducts(page, value, 0)
         }}
-      /> */}
+      />
     </>
   }
 
@@ -195,11 +207,11 @@ function Drafts(props) {
       }
       <div className={styles.ewSfgI}>
         <div className={styles.dqaTgJ}>
-          <div className="ant-row-flex ant-row-flex-middle">
+          <div className={styles['ant-row-flex'] + " ant-row-flex ant-row-flex-middle"}>
             <div className="ant-col ant-col-1">
               <CheckBox
                 check={selectedIds.length > 0}   
-                indeterminate={selectedIds.length != products.length}             
+                indeterminate={selectedIds.length != allDraftIds.length}             
                 handleCheck={handleAllCheck}
               />
             </div>
@@ -240,6 +252,26 @@ function Drafts(props) {
               </div>
             </div>
           </div>
+          {
+            selectedIds.length > 0 &&
+            <div className={styles.klIimJ}>
+              {
+                selectedIds.length < allDraftIds.length &&
+                <>
+                  All {selectedIds.length} products on this page are selected.
+                  <button type="button" className="ant-btn default ant-btn-link" onClick={handleClickSelectAll}>
+                    <span>Select all {allDraftIds.length} products</span>
+                  </button>
+                </>
+              }
+              {
+                selectedIds.length == allDraftIds.length &&
+                <button type="button" className="ant-btn ant-btn-link" onClick={handleClickCancelAll}>
+                  <span>Cancel all {selectedIds.length} selected products</span>
+                </button>
+              }
+            </div>
+          }
         </div>
         {content}
       </div>

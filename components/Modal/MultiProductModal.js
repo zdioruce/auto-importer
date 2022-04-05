@@ -29,7 +29,13 @@ export default function MultiProductModal({handleClose, handleImport}) {
     else {
       let ids = e.target.value.split("\n")
       ids = ids.filter(element => element.length > 0)
-      setProductIDs1(ids)
+
+      let skus = []
+      ids.forEach(element => {
+        skus.push({'ASIN':element,'Unit Cost':0,'Selling Fee':15,'Minimum Order':100,'Total Available Qty':1000})
+      })
+      
+      setProductIDs1(skus)
     }
   }
 
@@ -85,13 +91,11 @@ export default function MultiProductModal({handleClose, handleImport}) {
     //     name: c,
     //     selector: c,
     // }));
-
-    let asins = []
-    list.map(element => asins.push(element.ASIN))
-    setProductIDs2(asins)
+    
+    setProductIDs2(list)
     setLoading(false)
   }
-
+  
   let tabX = 0
   let tabWidth = 0
 
@@ -216,7 +220,7 @@ export default function MultiProductModal({handleClose, handleImport}) {
                           <div className="text-list">
                             <p>BuyId (Required)</p>
                           </div>
-                          {/* <a href="https://autods.s3-us-west-2.amazonaws.com/v2_bulk_upload_example.csv" target="_blank" className="link" rel="noopener noreferrer">Download Example File</a> */}
+                          <a href="https://boltplus.myshopify.com/sample.csv" target="_blank" className="link" rel="noopener noreferrer">Download Example File</a>
                         </div>
                       </div>
                     </div>
